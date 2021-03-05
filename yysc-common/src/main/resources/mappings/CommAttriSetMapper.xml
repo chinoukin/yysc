@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.CommAttriSetMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.CommAttriSet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comm_id" property="commId" jdbcType="BIGINT" />
+    <result column="attri_id" property="attriId" jdbcType="BIGINT" />
+    <result column="if_requ" property="ifRequ" jdbcType="CHAR" />
+    <result column="if_search" property="ifSearch" jdbcType="CHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comm_id, attri_id, if_requ, if_search, sort, create_by, create_date, update_by, 
+    update_date, remarks, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from comm_attri_set
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from comm_attri_set
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.CommAttriSet" >
+    insert into comm_attri_set (id, comm_id, attri_id,
+                                if_requ, if_search, sort, create_by,
+                                create_date, update_by, update_date,
+                                remarks, del_flag)
+    values (#{id,jdbcType=BIGINT}, #{commId,jdbcType=BIGINT}, #{attriId,jdbcType=BIGINT},
+            #{ifRequ,jdbcType=CHAR}, #{ifSearch,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+            #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.CommAttriSet" >
+    insert into comm_attri_set
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commId != null" >
+        comm_id,
+      </if>
+      <if test="attriId != null" >
+        attri_id,
+      </if>
+      <if test="ifRequ != null" >
+        if_requ,
+      </if>
+      <if test="ifSearch != null" >
+        if_search,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commId != null" >
+        #{commId,jdbcType=BIGINT},
+      </if>
+      <if test="attriId != null" >
+        #{attriId,jdbcType=BIGINT},
+      </if>
+      <if test="ifRequ != null" >
+        #{ifRequ,jdbcType=CHAR},
+      </if>
+      <if test="ifSearch != null" >
+        #{ifSearch,jdbcType=CHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.CommAttriSet" >
+    update comm_attri_set
+    <set >
+      <if test="commId != null" >
+        comm_id = #{commId,jdbcType=BIGINT},
+      </if>
+      <if test="attriId != null" >
+        attri_id = #{attriId,jdbcType=BIGINT},
+      </if>
+      <if test="ifRequ != null" >
+        if_requ = #{ifRequ,jdbcType=CHAR},
+      </if>
+      <if test="ifSearch != null" >
+        if_search = #{ifSearch,jdbcType=CHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.CommAttriSet" >
+    update comm_attri_set
+    set comm_id = #{commId,jdbcType=BIGINT},
+        attri_id = #{attriId,jdbcType=BIGINT},
+        if_requ = #{ifRequ,jdbcType=CHAR},
+        if_search = #{ifSearch,jdbcType=CHAR},
+        sort = #{sort,jdbcType=INTEGER},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        remarks = #{remarks,jdbcType=VARCHAR},
+        del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPageList" resultType="com.wisea.yysc.common.vo.product.CommAttriSetPageListVo" parameterType="com.wisea.yysc.common.po.product.CommAttriSetPageListPo" >
+    select
+    @rownum := @rownum + 1 AS number,
+      cas.id id,
+      cas.comm_id commId,
+      cas.attri_id attriId,
+      cas.if_requ ifRequ,
+      cas.if_search ifSearch,
+      cas.sort sort,
+      cam.comm_attri_name commAttriName,
+      cam.comm_attri_column commAttriColumn,
+      cm.comm_catg_name commCatgName
+    from
+    ( SELECT @rownum := 0 ) r,
+      comm_attri_set cas
+            left join comm_attri_mage cam on cas.attri_id=cam.id
+            left join comm_mage cm on cas.comm_id=cm.id
+    where
+      cas.del_flag = '0'
+    <if test="commAttriName != null and commAttriName != ''">
+      and  cam.comm_attri_name like concat('%',#{commAttriName},'%')
+    </if>
+    <if test="ifRequ != null and ifRequ != ''">
+      and  cas.if_requ = #{ifRequ}
+    </if>
+    <if test="commId != null and commId != ''">
+      and  cm.id = #{commId}
+    </if>
+    order by cas.sort
+  </select>
+  <select id="findInfo" resultType="com.wisea.yysc.common.vo.product.CommAttriSetInfoVo" parameterType="java.lang.Long" >
+    select
+      cas.id id,
+      cas.comm_id commId,
+      cas.attri_id attriId,
+      cas.if_requ ifRequ,
+      cas.if_search ifSearch,
+      cas.sort sort,
+      cam.comm_attri_name commAttriName,
+      cam.comm_attri_column commAttriColumn,
+      cm.comm_catg_name commCatgName
+    from
+      comm_attri_set cas
+        left join comm_attri_mage cam on cas.attri_id=cam.id
+        left join comm_mage cm on cas.comm_id=cm.id
+    where
+      cas.del_flag = '0'
+      and cas.id = #{id}
+  </select>
+  <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.CommAttriSet" >
+    update comm_attri_set
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<!--  属性删除时删除相关属性设置-->
+  <update id="updateByAttriId" parameterType="java.lang.Long">
+    update comm_attri_set
+        set del_flag = '1'
+    where attri_id=#{id}
+  </update>
+</mapper>

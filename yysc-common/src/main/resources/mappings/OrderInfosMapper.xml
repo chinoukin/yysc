@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.OrderInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.OrderInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comm_pub_id" property="commPubId" jdbcType="BIGINT" />
+    <result column="ord_num" property="ordNum" jdbcType="VARCHAR" />
+    <result column="buyer_id" property="buyerId" jdbcType="BIGINT" />
+    <result column="pay_method_type" property="payMethodType" jdbcType="VARCHAR" />
+    <result column="source_type" property="sourceType" jdbcType="VARCHAR" />
+    <result column="ord_remarks" property="ordRemarks" jdbcType="VARCHAR" />
+    <result column="ord_cancel_reason_id" property="ordCancelReasonId" jdbcType="BIGINT" />
+    <result column="ord_cancel_date" property="ordCancelDate" jdbcType="TIMESTAMP" />
+    <result column="pay_ord_date" property="payOrdDate" jdbcType="TIMESTAMP" />
+    <result column="comm_total_count" property="commTotalCount" jdbcType="INTEGER" />
+    <result column="amount_payable" property="amountPayable" jdbcType="DOUBLE" />
+    <result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+    <result column="comm_total_price" property="commTotalPrice" jdbcType="DOUBLE" />
+    <result column="order_state_type" property="orderStateType" jdbcType="VARCHAR" />
+    <result column="try_ord_type" property="tryOrdType" jdbcType="VARCHAR" />
+    <result column="refer_ord_date" property="referOrdDate" jdbcType="TIMESTAMP" />
+    <result column="seller_sure_date" property="sellerSureDate" jdbcType="TIMESTAMP" />
+    <result column="valid_start_date" property="validStartDate" jdbcType="TIMESTAMP" />
+    <result column="valid_end_date" property="validEndDate" jdbcType="TIMESTAMP" />
+    <result column="pay_dead_line_date" property="payDeadLineDate" jdbcType="TIMESTAMP" />
+    <result column="seller_exam_date" property="sellerExamDate" jdbcType="TIMESTAMP" />
+    <result column="level_spec_id" property="levelSpecId" jdbcType="BIGINT" />
+
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+
+  <resultMap id="ListResultMap" type="com.wisea.yysc.common.vo.trade.BuyerInfoListVo">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="ord_num" property="ordNum" jdbcType="VARCHAR"/>
+    <result column="ord_state_type" property="orderStateType" jdbcType="VARCHAR"/>
+    <result column="refer_ord_date" property="referOrdDate" jdbcType="TIMESTAMP"/>
+    <result column="pay_method_type" property="payMethodType" jdbcType="VARCHAR"/>
+    <result column="comm_total_price" property="commTotalPrice" jdbcType="DOUBLE" />
+    <result column="amount_payable" property="amountPayable" jdbcType="DOUBLE" />
+    <result column="source_type" property="sourceType" jdbcType="VARCHAR"/>
+    <result column="valid_start_date" property="validStartDate" jdbcType="TIMESTAMP"/>
+    <result column="valid_end_date" property="validEndDate" jdbcType="TIMESTAMP"/>
+    <result column="pay_dead_line_date" property="payDeadLineDate" jdbcType="TIMESTAMP"/>
+    <result column="memb_id" property="commPubId" jdbcType="BIGINT"/>
+    <result column="pet_name" property="buyerName" jdbcType="VARCHAR"/>
+    <result column="regist_tel" property="registTel" jdbcType="VARCHAR"/>
+    <result column="comm_catg_name" property="commCatgName" jdbcType="VARCHAR"/>
+    <result column="comm_title" property="commPubName" jdbcType="VARCHAR"/>
+    <result column="url" property="url" jdbcType="VARCHAR"/>
+    <result column="application_visit_id" property="applicationVisitId" jdbcType="BIGINT"/>
+  </resultMap>
+
+  <resultMap id="BaseOrderInfoResult" type="com.wisea.yysc.common.vo.trade.OrdersInfoVo">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="ord_num" property="ordNum" jdbcType="VARCHAR"/>
+    <result column="ord_state_type" property="orderStateType" jdbcType="VARCHAR"/>
+    <result column="refer_ord_date" property="referOrdDate" jdbcType="TIMESTAMP"/>
+    <result column="pay_ord_date" property="payOrdDate" jdbcType="TIMESTAMP"/>
+    <result column="pay_method_type" property="payMethodType" jdbcType="VARCHAR"/>
+    <result column="source_type" property="sourceType" jdbcType="VARCHAR"/>
+    <result column="valid_start_date" property="validStartDate" jdbcType="TIMESTAMP"/>
+    <result column="valid_end_date" property="validEndDate" jdbcType="TIMESTAMP"/>
+    <result column="pay_dead_line_date" property="payDeadLineDate" jdbcType="TIMESTAMP"/>
+    <result column="comm_total_price" property="commTotalPrice" jdbcType="DOUBLE"/>
+    <result column="comm_total_count" property="commTotalCount" jdbcType="DOUBLE"/>
+    <result column="amount_payable" property="amountPayable" jdbcType="DOUBLE" />
+    <result column="buyer_id" property="buyerId" jdbcType="BIGINT"/>
+    <result column="level_spec_id" property="levelSpecId" jdbcType="BIGINT" />
+    <result column="cont_name" property="buyerCompName" jdbcType="VARCHAR"/>
+    <result column="regist_tel" property="buyerPhone" jdbcType="VARCHAR"/>
+    <result column="entp_name" property="buyerCompany" jdbcType="VARCHAR"/>
+    <result column="address" property="buyeradderss" jdbcType="VARCHAR"/>
+
+    <association property="commPubInfosVo" javaType="com.wisea.yysc.common.vo.trade.CommPubInfosVo">
+      <result column="comm_title" property="commPubName" jdbcType="VARCHAR"/>
+      <result column="spec_name" property="commPubDesc" jdbcType="VARCHAR"/>
+      <result column="url" property="commPubUrl" jdbcType="VARCHAR"/>
+    </association>
+    <association property="ordInvo" javaType="com.wisea.yysc.common.vo.OrdInvoListVo">
+      <result column="invo_type" property="invoType" jdbcType="VARCHAR"/>
+      <result column="invo_form" property="invoForm" jdbcType="VARCHAR"/>
+      <result column="invo_catg_type" property="invoCatgType" jdbcType="VARCHAR"/>
+      <result column="invo_title" property="invoTitle" jdbcType="VARCHAR"/>
+      <result column="regist_address" property="registAddress" jdbcType="VARCHAR"/>
+      <result column="invo_state" property="invoState" jdbcType="VARCHAR"/>
+      <result column="invo_content_type" property="invoContentType" jdbcType="VARCHAR"/>
+    </association>
+    <collection property="ordOpreateInfoListVoList" ofType="com.wisea.yysc.common.vo.OrdOpreateInfoListVo">
+      <result column="operator" property="operator" jdbcType="BIGINT"/>
+      <result column="opreat_date" property="opreatDate" jdbcType="VARCHAR"/>
+      <result column="opreat_content" property="opreatContent" jdbcType="VARCHAR"/>
+    </collection>
+    <collection property="eleInvoList" ofType="com.wisea.yysc.common.vo.EleInvoFileListVo">
+      <result column="ele_invo_file" property="eleInvoUrl" jdbcType="VARCHAR"/>
+      <result column="file_type" property="fileType" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, comm_pub_id, ord_num, buyer_id, pay_method_type, source_type, ord_remarks, ord_cancel_reason_id, 
+    ord_cancel_date, pay_ord_date, comm_total_count, seller_id, comm_total_price, amount_payable,order_state_type,
+    refer_ord_date, seller_sure_date,valid_start_date,valid_end_date,pay_dead_line_date,seller_exam_date,level_spec_id,
+    try_ord_type, create_by, create_date, update_by, update_date,
+    remarks, del_flag
+  </sql>
+
+  <!-- 根据会员id 查询是否有使用订单 -->
+  <select id="selOrdertryList"  resultMap="BaseOrderInfoResult" parameterType="java.lang.Long">
+    select
+    id, ord_num, oi.buyer_id,
+    oi.valid_start_date,
+    oi.valid_end_date
+    from order_info oi
+    where
+    oi.del_flag = '0'
+    and oi.try_ord_type = '0'
+    and oi.buyer_id = #{membId}
+  </select>
+  <!-- 查询订单详情 -->
+  <select id="findOrderInfo" resultMap="BaseOrderInfoResult" parameterType="com.wisea.yysc.common.po.trade.OrdersInfoPo">
+    select
+    oi.id, ord_num, buyer_id, oi.pay_method_type,oi.level_spec_id, source_type, ord_remarks, ord_cancel_reason_id,
+    ord_cancel_date, pay_ord_date, comm_total_count, seller_id, comm_total_price,amount_payable, order_state_type as ord_state_type,
+    refer_ord_date, seller_sure_date, pay_dead_line_date,
+    cpi.comm_title,lsq.id as 'lsq_id',lsq.spec_name,cp.url,
+    inv.invo_type,inv.invo_form,inv.invo_catg_type,inv.invo_title,inv.regist_address,inv.invo_state,inv.invo_content_type,
+    eif.ele_invo_url,eif.file_type,
+    mi.cont_name,mi.regist_tel,mi.entp_name,mi.address,
+    ooi.operator,ooi.opreat_date,ooi.opreat_content
+    from order_info oi
+    LEFT JOIN comm_pub_info cpi ON cpi.id = oi.comm_pub_id
+    LEFT JOIN level_spec_quote lsq ON lsq.comm_pub_id = cpi.id
+    LEFT JOIN comm_picture cp ON cp.comm_pub_id = cpi.id and cp.comm_picture_type = '0'
+    LEFT JOIN ord_invo inv ON inv.ord_id = oi.id
+    LEFT JOIN memb_info mi ON mi.id = oi.buyer_id
+    LEFT JOIN ord_opreate_info ooi on ooi.ord_id = oi.id
+    LEFT JOIN ele_invo_file eif on eif.ord_invo_id = inv.ord_id
+    where
+    oi.del_flag = '0'
+    and oi.id = #{id}
+    order by ooi.create_date desc
+  </select>
+
+  <!-- 查询订单列表 -->
+  <select id="findOrderList" resultMap="ListResultMap"
+          parameterType="com.wisea.yysc.common.po.trade.BuyerOrderListPo">
+    SELECT
+    oi.id,oi.comm_pub_id,oi.ord_num,oi.buyer_id,oi.refer_ord_date,oi.pay_method_type,oi.comm_total_price,oi.source_type,oi.valid_start_date,
+    oi.valid_end_date,oi.pay_dead_line_date,oi.amount_payable,oi.order_state_type,
+    cpi.comm_title,cpi.application_visit_id,
+    cp.url,
+    cm.comm_catg_name,
+    mi.pet_name,mi.regist_tel
+    FROM
+    order_info oi
+    LEFT JOIN memb_info mi ON mi.id = oi.buyer_id
+    LEFT JOIN comm_pub_info cpi ON cpi.id = oi.comm_pub_id
+    LEFT JOIN comm_mage cm ON cm.id = cpi.comm_id
+    LEFT JOIN comm_picture cp ON cp.comm_pub_id = cpi.id and cp.comm_picture_type = '0'
+    WHERE oi.del_flag = '0'
+    <if test="ordNum != null and ordNum != ''">
+      AND oi.ord_num LIKE CONCAT('%', #{ordNum}, '%')
+    </if>
+    <if test="membId != null and membId != ''">
+      AND oi.buyer_id LIKE CONCAT('%', #{membId}, '%')
+    </if>
+    <if test="orderStateType != null and orderStateType != ''">
+      AND oi.order_state_type = #{orderStateType}
+    </if>
+    <if test="timeStart != null">
+      AND oi.refer_ord_date >= #{timeStart}
+    </if>
+    <if test="timeEnd != null">
+      AND oi.refer_ord_date <![CDATA[<=]]> #{timeEnd}
+    </if>
+    <if test="commCatgName != null">
+      AND cm.comm_catg_name like CONCAT('%', #{commCatgName}, '%')
+    </if>
+    ORDER BY IFNULL(oi.refer_ord_date,oi.create_date) DESC
+  </select>
+  <!-- 查询订单状态对应的信息 -->
+  <select id="getOrderStateCountMap" parameterType="com.wisea.yysc.common.po.trade.BuyerOrderListPo"
+          resultType="java.util.Map">
+        SELECT
+        oi.order_state_type,
+        count(oi.order_state_type)
+        FROM
+        order_info oi
+        LEFT JOIN memb_info mi ON mi.id = oi.buyer_id
+        LEFT JOIN comm_pub_info cpi ON cpi.id = oi.comm_pub_id
+        LEFT JOIN comm_mage cm ON cm.id = cpi.comm_id
+        WHERE oi.del_flag = '0'
+        <if test="ordNum != null and ordNum != ''">
+          AND oi.ord_num LIKE CONCAT('%', #{ordNum}, '%')
+        </if>
+        <if test="membId != null and membId != ''">
+          AND oi.buyer_id LIKE CONCAT('%', #{membId}, '%')
+        </if>
+        <if test="orderStateType != null and orderStateType != ''">
+          AND oi.order_state_type = #{orderStateType}
+        </if>
+        <if test="timeStart != null">
+          AND oi.refer_ord_date >= #{timeStart}
+        </if>
+        <if test="timeEnd != null">
+          AND oi.refer_ord_date <![CDATA[<=]]> #{timeEnd}
+        </if>
+        <if test="commCatgName != null">
+          AND cm.comm_catg_name like CONCAT('%', #{commCatgName}, '%')
+        </if>
+        GROUP BY oi.order_state_type
+    </select>
+  <!-- 查询订单最大编号 -->
+  <select id="findOrderNum" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT ord_num FROM order_info WHERE ord_num LIKE CONCAT(#{ordNum}, '%')
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.OrderInfo">
+    insert into order_info (id, comm_pub_id, ord_num, 
+      buyer_id, pay_method_type, source_type, 
+      ord_remarks, ord_cancel_reason_id, ord_cancel_date, 
+      pay_ord_date, comm_total_count, seller_id, 
+      comm_total_price,amount_payable, order_state_type, refer_ord_date,
+      seller_sure_date, valid_start_date, valid_end_date, pay_dead_line_date,seller_exam_date, level_spec_id, create_by, create_date,
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=BIGINT}, #{commPubId,jdbcType=BIGINT}, #{ordNum,jdbcType=VARCHAR}, 
+      #{buyerId,jdbcType=BIGINT}, #{payMethodType,jdbcType=VARCHAR}, #{sourceType,jdbcType=VARCHAR}, 
+      #{ordRemarks,jdbcType=VARCHAR}, #{ordCancelReasonId,jdbcType=BIGINT}, #{ordCancelDate,jdbcType=TIMESTAMP}, 
+      #{payOrdDate,jdbcType=TIMESTAMP}, #{commTotalCount,jdbcType=INTEGER}, #{sellerId,jdbcType=BIGINT}, 
+      #{commTotalPrice,jdbcType=DOUBLE},#{amountPayable,jdbcType=DOUBLE}, #{orderStateType,jdbcType=VARCHAR}, #{referOrdDate,jdbcType=TIMESTAMP},
+      #{sellerSureDate,jdbcType=TIMESTAMP},#{validStartDate,jdbcType=TIMESTAMP},#{validEndDate,jdbcType=TIMESTAMP},
+      #{payDeadLineDate,jdbcType=TIMESTAMP},#{sellerExamDate,jdbcType=TIMESTAMP},#{levelSpecId,jdbcType=BIGINT},
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commPubId != null" >
+        comm_pub_id,
+      </if>
+      <if test="ordNum != null" >
+        ord_num,
+      </if>
+      <if test="buyerId != null" >
+        buyer_id,
+      </if>
+      <if test="payMethodType != null" >
+        pay_method_type,
+      </if>
+      <if test="sourceType != null" >
+        source_type,
+      </if>
+      <if test="ordRemarks != null" >
+        ord_remarks,
+      </if>
+      <if test="ordCancelReasonId != null" >
+        ord_cancel_reason_id,
+      </if>
+      <if test="ordCancelDate != null" >
+        ord_cancel_date,
+      </if>
+      <if test="payOrdDate != null" >
+        pay_ord_date,
+      </if>
+      <if test="commTotalCount != null" >
+        comm_total_count,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="commTotalPrice != null" >
+        comm_total_price,
+      </if>
+      <if test="amountPayable != null" >
+        amount_payable,
+      </if>
+      <if test="orderStateType != null" >
+        order_state_type,
+      </if>
+      <if test="referOrdDate != null" >
+        refer_ord_date,
+      </if>
+      <if test="sellerSureDate != null">
+        seller_sure_date,
+      </if>
+      <if test="validStartDate != null">
+        valid_start_date,
+      </if>
+      <if test="validEndDate != null" >
+        valid_end_date,
+      </if>
+      <if test="payDeadLineDate != null" >
+        pay_dead_line_date,
+      </if>
+      <if test="sellerExamDate != null" >
+        seller_exam_date,
+      </if>
+      <if test="levelSpecId != null" >
+        level_spec_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commPubId != null" >
+        #{commPubId,jdbcType=BIGINT},
+      </if>
+      <if test="ordNum != null" >
+        #{ordNum,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null" >
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="payMethodType != null" >
+        #{payMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="ordRemarks != null" >
+        #{ordRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ordCancelReasonId != null" >
+        #{ordCancelReasonId,jdbcType=BIGINT},
+      </if>
+      <if test="ordCancelDate != null" >
+        #{ordCancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payOrdDate != null" >
+        #{payOrdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commTotalCount != null" >
+        #{commTotalCount,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="commTotalPrice != null" >
+        #{commTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="amountPayable != null" >
+        #{amountPayable,jdbcType=DOUBLE},
+      </if>
+      <if test="orderStateType != null" >
+        #{orderStateType,jdbcType=VARCHAR},
+      </if>
+      <if test="referOrdDate != null" >
+        #{referOrdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellerSureDate != null" >
+        #{sellerSureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validStartDate != null" >
+        #{validStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndDate != null" >
+        #{validEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDeadLineDate != null" >
+        #{payDeadLineDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellerExamDate != null" >
+        #{sellerExamDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="levelSpecId != null" >
+        #{levelSpecId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="commPubId != null" >
+        comm_pub_id = #{commPubId,jdbcType=BIGINT},
+      </if>
+      <if test="ordNum != null" >
+        ord_num = #{ordNum,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="payMethodType != null" >
+        pay_method_type = #{payMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="ordRemarks != null" >
+        ord_remarks = #{ordRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ordCancelReasonId != null" >
+        ord_cancel_reason_id = #{ordCancelReasonId,jdbcType=BIGINT},
+      </if>
+      <if test="ordCancelDate != null" >
+        ord_cancel_date = #{ordCancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payOrdDate != null" >
+        pay_ord_date = #{payOrdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commTotalCount != null" >
+        comm_total_count = #{commTotalCount,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="commTotalPrice != null" >
+        comm_total_price = #{commTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="amountPayable != null" >
+        amount_payable = #{amountPayable,jdbcType=DOUBLE},
+      </if>
+      <if test="orderStateType != null" >
+        order_state_type = #{orderStateType,jdbcType=VARCHAR},
+      </if>
+      <if test="referOrdDate != null" >
+        refer_ord_date = #{referOrdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellerSureDate != null" >
+        seller_sure_date = #{sellerSureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validStartDate != null" >
+        valid_start_date = #{validStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndDate != null" >
+        valid_end_date = #{validEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDeadLineDate != null" >
+        pay_dead_line_date = #{payDeadLineDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellerExamDate != null" >
+        seller_exam_date = #{sellerExamDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="levelSpecId != null" >
+        level_spec_id = #{levelSpecId,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.OrderInfo" >
+    update order_info
+    set comm_pub_id = #{commPubId,jdbcType=BIGINT},
+      ord_num = #{ordNum,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      pay_method_type = #{payMethodType,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      ord_remarks = #{ordRemarks,jdbcType=VARCHAR},
+      ord_cancel_reason_id = #{ordCancelReasonId,jdbcType=BIGINT},
+      ord_cancel_date = #{ordCancelDate,jdbcType=TIMESTAMP},
+      pay_ord_date = #{payOrdDate,jdbcType=TIMESTAMP},
+      comm_total_count = #{commTotalCount,jdbcType=INTEGER},
+      seller_id = #{sellerId,jdbcType=BIGINT},
+      comm_total_price = #{commTotalPrice,jdbcType=DOUBLE},
+      amount_payable = #{amountPayable,jdbcType=DOUBLE},
+      order_state_type = #{orderStateType,jdbcType=VARCHAR},
+      refer_ord_date = #{referOrdDate,jdbcType=TIMESTAMP},
+      seller_sure_date = #{sellerSureDate,jdbcType=TIMESTAMP},
+      valid_start_date = #{validStartDate,jdbcType=TIMESTAMP},
+      valid_end_date = #{validEndDate,jdbcType=TIMESTAMP},
+      pay_dead_line_date = #{payDeadLineDate,jdbcType=TIMESTAMP},
+      seller_exam_date = #{sellerExamDate,jdbcType=TIMESTAMP},
+      level_spec_id = #{levelSpecId,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPage" resultType="com.wisea.yysc.common.vo.OrderInfoListVo" parameterType="com.wisea.yysc.common.po.OrderInfoPagePo" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where del_flag = '0'
+  </select>
+  <select id="findList" resultType="com.wisea.yysc.common.vo.OrderInfoListVo" parameterType="com.wisea.yysc.common.po.OrderInfoListPo" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where del_flag = '0'
+  </select>
+    <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.OrderInfo" >
+    update order_info
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--  应用列表-->
+  <select id="findAppList" resultType="com.wisea.yysc.common.vo.FindMembInfoPageVo" parameterType="com.wisea.yysc.common.po.FindMembInfoPo">
+    SELECT
+        cpi.id id,
+        cpi.comm_title commTitle,
+        lsq.spec_name specName,
+        CONCAT(
+        IF
+            (
+                TIMESTAMPDIFF(
+                    MONTH,
+                    DATE_FORMAT( NOW(), '%Y-%m-%d %H:%i:%S' ),
+                max( oi.valid_end_date )) != 0,
+                TIMESTAMPDIFF(
+                    MONTH,
+                    DATE_FORMAT( NOW(), '%Y-%m-%d %H:%i:%S' ),
+                max( oi.valid_end_date )),
+                '不足一'
+            ),
+            '个月'
+        ) valid,
+        max( oi.valid_start_date ) validStartDate,
+        max( oi.valid_end_date ) validEndDate
+    FROM
+        order_info oi
+        LEFT JOIN comm_pub_info cpi ON cpi.id = oi.comm_pub_id
+        LEFT JOIN level_spec_quote lsq ON lsq.id = oi.level_spec_id
+        WHERE
+        oi.del_flag = '0'
+        AND oi.order_state_type = '4'
+        AND
+        oi.valid_end_date > NOW()
+        AND oi.buyer_id = #{id,jdbcType=BIGINT}
+    GROUP BY
+        oi.buyer_id,
+        oi.comm_pub_id
+    ORDER BY
+        oi.valid_start_date DESC
+  </select>
+  <!--  分页查询会员排行列表信息-->
+  <select id="findMembRankList" resultType="com.wisea.yysc.common.vo.MembRankPageListVo" parameterType="com.wisea.yysc.common.po.MembRankPageListPo">
+    SELECT
+    @rownum := @rownum + 1 AS rankNum,
+    t.*
+    FROM
+    (
+    SELECT
+    mi.regist_tel registTel,
+    mi.entp_name entpName,
+    COUNT( oi.id ) ordSum,
+    SUM( comm_total_price ) commTotalPrice
+    FROM
+    order_info oi
+    LEFT JOIN memb_info mi ON oi.buyer_id = mi.id
+    WHERE
+    oi.del_flag = '0'
+     AND oi.order_state_type = '4'
+    <if test="val == '0'.toString()">
+      AND date_sub( curdate(), INTERVAL 30 DAY )  <![CDATA[ <=  ]]>oi.pay_ord_date
+    </if>
+    <if test="val == '1'.toString()">
+      AND date_sub( curdate(), INTERVAL 90 DAY )  <![CDATA[ <=  ]]>oi.pay_ord_date
+    </if>
+    <if test="startDate != null">
+      AND oi.pay_ord_date <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test="endDate != null">
+      AND oi.pay_ord_date <![CDATA[ <= ]]> #{endDate}
+    </if>
+    GROUP BY
+    oi.buyer_id
+    ORDER BY
+    comm_total_price DESC,
+    ordSum DESC
+    ) t,(SELECT @rownum := 0) r
+  </select>
+
+  <!-- 查询代办事务 -->
+  <select id="orderStatistics" parameterType="java.util.Map" resultType="com.wisea.yysc.common.vo.trade.OrderStatisticsVo">
+    select
+      SUM(CASE WHEN oi.order_state_type = '0' THEN 1 ELSE 0 END) paymentCount,
+      SUM(CASE WHEN oi.order_state_type = '2' THEN 1 ELSE 0 END) completCount,
+      SUM(CASE WHEN oi.order_state_type = '3' THEN 1 ELSE 0 END) cancelCount
+    from
+      order_info oi
+    where
+      oi.order_state_type != '1'
+      and oi.seller_id = #{sellerId}
+    group by
+      oi.seller_id
+  </select>
+  <!-- 昨日交易统计 -->
+  <select id="dayStatistics" parameterType="java.util.Map" resultType="com.wisea.yysc.common.vo.trade.DayStatisticsVo">
+    select
+      max(t_.day_ord_count) dayOrdCount,
+      max(t_.day_sales) daySales,
+      max(t_.yesterday_sales) yesterdaySales,
+      max(t_.nearly_sevev_sales) nearlySevevSales
+    from(
+      select
+        count(oi.id) day_ord_count,
+        0 day_sales,
+        0 yesterday_sales,
+        0 nearly_sevev_sales
+      from
+        order_info oi
+      where
+        oi.seller_id = #{sellerId}
+        and oi.refer_ord_date > #{startDate}
+        and oi.refer_ord_date <![CDATA[<]]> #{endDate}
+      UNION ALL
+      select
+        0 day_ord_count,
+        ROUND(sum(oi.amount_payable), 2) day_sales,
+        0 yesterday_sales,
+        0 nearly_sevev_sales
+      from
+        order_info oi
+      where
+        oi.seller_id = #{sellerId}
+        and oi.pay_ord_date > #{startDate}
+        and oi.pay_ord_date <![CDATA[<]]> #{endDate}
+      group by
+        DATE_FORMAT(oi.pay_ord_date, '%Y-%m-%d')
+      UNION ALL
+      select
+        0 day_ord_count,
+        0 day_sales,
+        ROUND(sum(oi.amount_payable), 2) yesterday_sales,
+        0 nearly_sevev_sales
+      from
+        order_info oi
+      where
+        oi.seller_id = #{sellerId}
+        and oi.pay_ord_date > #{yesterStartDate}
+        and oi.pay_ord_date <![CDATA[<]]> #{yesterEndDate}
+      group by
+        DATE_FORMAT(oi.pay_ord_date, '%Y-%m-%d')
+      UNION ALL
+      select
+        0 day_ord_count,
+        0 day_sales,
+        0 yesterday_sales,
+        ROUND(sum(oi.amount_payable), 2) nearly_sevev_sales
+      from
+        order_info oi
+      where
+        oi.seller_id = #{sellerId}
+        and oi.pay_ord_date > #{startTime}
+        and oi.pay_ord_date <![CDATA[<]]> #{endTime}
+      group by
+        DATE_FORMAT(oi.pay_ord_date, '%Y-%m-%d')
+    ) t_
+  </select>
+  <!-- 查询确认超时和支付超时的订单 -->
+  <select id="findPreOutTimeOrders" resultMap="BaseResultMap">
+    SELECT *
+	FROM order_info
+	WHERE 1 = 1
+	    AND (order_state_type = '0' AND NOW() > pay_dead_line_date)
+   </select>
+ <!-- 订单导出信息  -->
+  <select id="orderListExp" resultType="com.wisea.yysc.common.vo.trade.SellerOrderListVo" parameterType="com.wisea.yysc.common.po.trade.SellerOrderExpPo">
+    SELECT
+    oi.ord_num,
+    oi.refer_ord_date,
+    mi.pet_name,
+    oi.amount_payable,
+    oi.pay_method_type,
+    oi.source_type,
+    oi.order_state_type,
+    dict.label as orderStateName
+    FROM order_info oi
+    LEFT JOIN memb_info mi ON mi.id = oi.buyer_id
+    LEFT JOIN (SELECT VALUE,label FROM sys_dict WHERE TYPE = 'order_state_type') dict ON oi.order_state_type = dict.value
+    where oi.del_flag = '0'
+    <if test="startDate != null and startDate != ''">
+      and oi.refer_ord_date >= #{startDate,jdbcType=BIGINT}
+    </if>
+    <if test="endDate != null and endDate != '' ">
+      and oi.refer_ord_date <![CDATA[<]]> #{endDate,jdbcType=BIGINT}
+    </if>
+    <if test="searchKey != null and searchKey != ''">
+      and oi.ord_num like concat('%',#{searchKey},'%')
+    </if>
+    order by oi.refer_ord_date
+  </select>
+
+  <!-- 财务统计订单总额 -->
+  <select id="statisOrder" parameterType="com.wisea.yysc.common.po.trade.StaticOrderPo" resultType="com.wisea.yysc.common.vo.trade.StatisOrderVo">
+    SELECT
+    order_state_type,
+    COUNT(*) AS effOrdCount,
+    COUNT(DISTINCT(buyer_id)) AS effMembCount,
+    SUM(comm_total_count) as effCommCount,
+    ROUND(SUM(amount_payable),2) AS effOrdAmount
+    FROM order_info
+    WHERE del_flag = '0'
+    <if test="val == '0'.toString()">
+      AND date_sub( curdate(), INTERVAL 30 DAY )  <![CDATA[ <=  ]]> pay_ord_date
+    </if>
+    <if test="val == '1'.toString()">
+      AND date_sub( curdate(), INTERVAL 90 DAY )  <![CDATA[ <=  ]]> pay_ord_date
+    </if>
+    <if test="states != null and states != ''">
+      AND order_state_type IN(${states})
+    </if>
+    <if test="sellerId != null and sellerId != ''">
+      and seller_id = #{sellerId,jdbcType=BIGINT}
+    </if>
+    <if test="startDate != null">
+      and refer_ord_date >= #{startDate,jdbcType=BIGINT}
+    </if>
+    <if test="endDate != null">
+      and refer_ord_date  <![CDATA[ < ]]> #{endDate,jdbcType=BIGINT}
+    </if>
+    GROUP BY order_state_type
+  </select>
+
+  <!-- 后台用户统计 -->
+  <select id="membStatistics" parameterType="java.util.Map" resultType="com.wisea.yysc.common.vo.trade.MembStatisticVo">
+    select
+	  max(t_.memb_count) dayCount,
+      max(t_.yesterday_count) yesterdayCount,
+	  max(t_.mounth_count) monthCount,
+	  max(t_.total_count) totalCount
+    from(
+      select
+        count(mi.id) memb_count,
+		0 yesterday_count,
+        0 mounth_count,
+        0 total_count
+      from
+        memb_info mi
+      where
+		del_flag = '0'
+        and mi.create_date > #{startDate}
+        and mi.create_date <![CDATA[<]]> #{endDate}
+      UNION ALL
+      select
+        0 memb_count,
+		count(mi.id) yesterday_count,
+		0 mounth_count,
+        0 total_count
+      from
+        memb_info mi
+      where
+		del_flag = '0'
+        and mi.create_date > #{yesterDate}
+        and mi.create_date <![CDATA[<]]> #{yesterEndDate}
+      UNION ALL
+       select
+        0 memb_count,
+		0 yesterday_count,
+		count(mi.id) mounth_count,
+		0 total_count
+      from
+        memb_info mi
+      where
+        del_flag = '0'
+        and mi.create_date > #{monthDate}
+        and mi.create_date <![CDATA[<]]> #{monthDateEnd}
+      UNION ALL
+       select
+        0 memb_count,
+        0 yesterday_count,
+        0 mounth_count,
+		count(mi.id) total_count
+      from
+        memb_info mi
+      where
+        del_flag = '0'
+    ) t_
+  </select>
+
+  <!-- 【统计】订单数量统计 -->
+  <select id="orderCountStatistics" parameterType="java.util.Map" resultMap="orderCountStatisticsResultMap">
+    SELECT
+    #{sellerId} sellerId,
+    COUNT(CASE WHEN DATE_FORMAT(NOW(),'%Y-%m') = DATE_FORMAT(oi.create_date, '%Y-%m') THEN oi.id END)
+    thisMonthOrderCount,
+    COUNT(CASE WHEN DATE_FORMAT(oi.create_date, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(),INTERVAL 1 MONTH),
+    '%Y-%m') THEN oi.id END) lastMonthOrderCount,
+    COUNT(CASE WHEN YEARWEEK(DATE_FORMAT(oi.create_date, '%Y-%m-%d')) = YEARWEEK(NOW()) THEN oi.id END)
+    thisWeekOrderCount,
+    COUNT(CASE WHEN YEARWEEK(DATE_FORMAT(oi.create_date, '%Y-%m-%d')) = YEARWEEK(NOW()) - 1 THEN oi.id END)
+    lastWeekOrderCount
+    FROM
+    order_info oi
+    WHERE
+    oi.create_date BETWEEN DATE_SUB(NOW(),INTERVAL 2 MONTH) AND NOW()
+    <if test="sellerId != null and sellerId != ''">
+      AND oi.seller_id = #{sellerId}
+    </if>
+  </select>
+
+  <resultMap id="orderCountStatisticsResultMap" type="com.wisea.yysc.common.vo.trade.OrderCountStatisticsVo">
+    <result column="thisMonthOrderCount" property="thisMonthOrderCount"/>
+    <result column="lastMonthOrderCount" property="lastMonthOrderCount"/>
+    <result column="thisWeekOrderCount" property="thisWeekOrderCount"/>
+    <result column="lastWeekOrderCount" property="lastWeekOrderCount"/>
+    <collection property="orderCountCharts"
+                column="{sellerId = sellerId, thisMonthOrderCount = thisMonthOrderCount}"
+                select="selectOrderCountCharts"/>
+  </resultMap>
+
+  <!-- 级联查询图表数据 -->
+  <select id="selectOrderCountCharts" parameterType="java.util.Map"
+          resultType="com.wisea.yysc.common.vo.trade.ChartVo">
+    SELECT
+    t_.md_ xPoint,
+    IFNULL(ot_.count_, 0) yValue
+    FROM (
+    SELECT
+    DATE_FORMAT(DATE_SUB(SYSDATE(), INTERVAL st.id DAY), '%m-%d') md_
+    FROM
+    statistics_temp st
+    WHERE
+    st.id <![CDATA[<]]> 30
+    ORDER BY
+    st.id DESC
+    ) t_
+    LEFT JOIN (
+    SELECT
+    DATE_FORMAT(oi.create_date, '%m-%d') md_,
+    COUNT(DATE_FORMAT(oi.create_date, '%m-%d')) count_
+    FROM
+    order_info oi
+    WHERE
+    oi.create_date >= DATE_SUB(SYSDATE(), INTERVAL 29 DAY)
+    <if test="sellerId != null and sellerId != ''">
+      AND oi.seller_id = #{sellerId}
+    </if>
+    GROUP BY
+    DATE_FORMAT(oi.create_date, '%m-%d')
+    ) ot_ ON t_.md_ = ot_.md_
+    ORDER BY t_.md_
+  </select>
+
+  <!-- 【统计】订单销售统计 -->
+  <select id="orderAmounStatistics" parameterType="java.util.Map" resultMap="orderAmounStatisticsResultMap">
+    SELECT
+    #{sellerId} sellerId,
+    IFNULL(ROUND(SUM(CASE WHEN DATE_FORMAT(NOW(),'%Y-%m') = DATE_FORMAT(oi.create_date, '%Y-%m') THEN
+    oi.amount_payable END), 2), 0) thisMonthOrderAmoun,
+    IFNULL(ROUND(SUM(CASE WHEN DATE_FORMAT(oi.create_date, '%Y-%m') = DATE_FORMAT(DATE_SUB(CURDATE(),INTERVAL 1
+    MONTH), '%Y-%m') THEN oi.amount_payable END), 2), 0) lastMonthOrderAmoun,
+    IFNULL(ROUND(SUM(CASE WHEN YEARWEEK(DATE_FORMAT(oi.create_date, '%Y-%m-%d')) = YEARWEEK(NOW()) THEN
+    oi.amount_payable END), 2), 0) thisWeekOrderAmoun,
+    IFNULL(ROUND(SUM(CASE WHEN YEARWEEK(DATE_FORMAT(oi.create_date, '%Y-%m-%d')) = YEARWEEK(NOW()) - 1 THEN
+    oi.amount_payable END), 2), 0) lastWeekOrderAmoun
+    FROM
+    order_info oi
+    WHERE
+    oi.create_date BETWEEN DATE_SUB(NOW(),INTERVAL 2 MONTH) AND NOW()
+    <if test="sellerId != null and sellerId != ''">
+      AND oi.seller_id = #{sellerId}
+    </if>
+  </select>
+
+  <resultMap id="orderAmounStatisticsResultMap" type="com.wisea.yysc.common.vo.trade.OrderAmounStatisticsVo">
+    <result column="thisMonthOrderAmoun" property="thisMonthOrderAmoun"/>
+    <result column="lastMonthOrderAmoun" property="lastMonthOrderAmoun"/>
+    <result column="thisWeekOrderAmoun" property="thisWeekOrderAmoun"/>
+    <result column="lastWeekOrderAmoun" property="lastWeekOrderAmoun"/>
+    <collection property="orderAmounCharts"
+                column="{sellerId = sellerId, thisMonthOrderAmoun = thisMonthOrderAmoun}"
+                select="selectOrderAmounCharts"/>
+  </resultMap>
+
+  <!-- 级联查询近30天图表数据 -->
+  <select id="selectOrderAmounCharts" parameterType="java.util.Map"
+          resultType="com.wisea.yysc.common.vo.trade.ChartVo">
+    SELECT
+    t_.md_ xPoint,
+    IFNULL(ot_.totalAmount, 0) yValue
+    FROM (
+    SELECT
+    DATE_FORMAT(DATE_SUB(SYSDATE(), INTERVAL st.id DAY), '%m-%d') md_
+    FROM
+    statistics_temp st
+    WHERE
+    st.id <![CDATA[<]]> 30
+    ORDER BY
+    st.id DESC
+    ) t_
+    LEFT JOIN (
+    SELECT
+    DATE_FORMAT(oi.create_date, '%m-%d') md_,
+    ROUND(SUM(oi.amount_payable), 2) totalAmount
+    FROM
+    order_info oi
+    WHERE
+    oi.create_date >= DATE_SUB(SYSDATE(), INTERVAL 29 DAY)
+    <if test="sellerId != null and sellerId != ''">
+      AND oi.seller_id = #{sellerId}
+    </if>
+    GROUP BY
+    DATE_FORMAT(oi.create_date, '%m-%d')
+    ) ot_ ON t_.md_ = ot_.md_
+    ORDER BY t_.md_
+  </select>
+  <select id="checkValid" resultType="com.wisea.yysc.common.vo.memb.CheckValidVo" parameterType="com.wisea.yysc.common.po.memb.CheckValidPo">
+      SELECT oi.valid_end_date,cpi.login_type
+      FROM  order_info oi
+      LEFT JOIN comm_pub_info cpi on cpi.id = oi.comm_pub_id
+      WHERE oi.del_flag = '0'
+      AND oi.buyer_id = #{userId}
+      AND cpi.login_type = #{loginType}
+      GROUP BY
+        oi.buyer_id,
+        oi.comm_pub_id
+      ORDER BY
+        oi.valid_start_date DESC
+  </select>
+</mapper>

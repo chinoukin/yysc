@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.ApplicationVisitMageMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.ApplicationVisitMage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="unit_num" property="unitNum" jdbcType="VARCHAR" />
+    <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+    <result column="application_type" property="applicationType" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="application_url" property="applicationUrl" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="android_load_url" property="androidLoadUrl" jdbcType="VARCHAR" />
+    <result column="android_qr_load_url" property="androidQrLoadUrl" jdbcType="VARCHAR" />
+    <result column="apple_load_url" property="appleLoadUrl" jdbcType="VARCHAR" />
+    <result column="apple_qr_load_url" property="appleQrLoadUrl" jdbcType="VARCHAR" />
+    <result column="applets_load_url" property="appletsLoadUrl" jdbcType="VARCHAR" />
+    <result column="applets_qr_load_url" property="appletsQrLoadUrl" jdbcType="VARCHAR" />
+    <result column="web_url" property="webUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, unit_num, application_name, application_type, sort, create_by, create_date, application_url,
+    update_by, update_date, remarks, del_flag, android_load_url, android_qr_load_url,
+    apple_load_url, apple_qr_load_url, applets_load_url, applets_qr_load_url, web_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from application_visit_mage
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from application_visit_mage
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.ApplicationVisitMage" >
+    insert into application_visit_mage (id, unit_num, application_name,
+                                        application_type, sort, create_by,
+                                        create_date, application_url, update_by,
+                                        update_date, remarks, del_flag,
+                                        android_load_url, android_qr_load_url, apple_load_url,
+                                        apple_qr_load_url, applets_load_url, applets_qr_load_url,
+                                        web_url)
+    values (#{id,jdbcType=BIGINT}, #{unitNum,jdbcType=VARCHAR}, #{applicationName,jdbcType=VARCHAR},
+            #{applicationType,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}, #{applicationUrl,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR},
+            #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR},
+            #{androidLoadUrl,jdbcType=VARCHAR}, #{androidQrLoadUrl,jdbcType=VARCHAR}, #{appleLoadUrl,jdbcType=VARCHAR},
+            #{appleQrLoadUrl,jdbcType=VARCHAR}, #{appletsLoadUrl,jdbcType=VARCHAR}, #{appletsQrLoadUrl,jdbcType=VARCHAR},
+            #{webUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.ApplicationVisitMage" >
+    insert into application_visit_mage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="unitNum != null" >
+        unit_num,
+      </if>
+      <if test="applicationName != null" >
+        application_name,
+      </if>
+      <if test="applicationType != null" >
+        application_type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="applicationUrl != null" >
+        application_url,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="androidLoadUrl != null" >
+        android_load_url,
+      </if>
+      <if test="androidQrLoadUrl != null" >
+        android_qr_load_url,
+      </if>
+      <if test="appleLoadUrl != null" >
+        apple_load_url,
+      </if>
+      <if test="appleQrLoadUrl != null" >
+        apple_qr_load_url,
+      </if>
+      <if test="appletsLoadUrl != null" >
+        applets_load_url,
+      </if>
+      <if test="appletsQrLoadUrl != null" >
+        applets_qr_load_url,
+      </if>
+      <if test="webUrl != null" >
+        web_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="unitNum != null" >
+        #{unitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationName != null" >
+        #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationType != null" >
+        #{applicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationUrl != null" >
+        #{applicationUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="androidLoadUrl != null" >
+        #{androidLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="androidQrLoadUrl != null" >
+        #{androidQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appleLoadUrl != null" >
+        #{appleLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appleQrLoadUrl != null" >
+        #{appleQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appletsLoadUrl != null" >
+        #{appletsLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appletsQrLoadUrl != null" >
+        #{appletsQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webUrl != null" >
+        #{webUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.ApplicationVisitMage" >
+    update application_visit_mage
+    <set >
+      <if test="unitNum != null" >
+        unit_num = #{unitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationName != null" >
+        application_name = #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationType != null" >
+        application_type = #{applicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationUrl != null" >
+        application_url = #{applicationUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="androidLoadUrl != null" >
+        android_load_url = #{androidLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="androidQrLoadUrl != null" >
+        android_qr_load_url = #{androidQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appleLoadUrl != null" >
+        apple_load_url = #{appleLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appleQrLoadUrl != null" >
+        apple_qr_load_url = #{appleQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appletsLoadUrl != null" >
+        applets_load_url = #{appletsLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="appletsQrLoadUrl != null" >
+        applets_qr_load_url = #{appletsQrLoadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webUrl != null" >
+        web_url = #{webUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.ApplicationVisitMage" >
+    update application_visit_mage
+    set unit_num = #{unitNum,jdbcType=VARCHAR},
+        application_name = #{applicationName,jdbcType=VARCHAR},
+        application_type = #{applicationType,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        application_url = #{applicationUrl,jdbcType=VARCHAR},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        remarks = #{remarks,jdbcType=VARCHAR},
+        del_flag = #{delFlag,jdbcType=CHAR},
+        android_load_url = #{androidLoadUrl,jdbcType=VARCHAR},
+        android_qr_load_url = #{androidQrLoadUrl,jdbcType=VARCHAR},
+        apple_load_url = #{appleLoadUrl,jdbcType=VARCHAR},
+        apple_qr_load_url = #{appleQrLoadUrl,jdbcType=VARCHAR},
+        applets_load_url = #{appletsLoadUrl,jdbcType=VARCHAR},
+        applets_qr_load_url = #{appletsQrLoadUrl,jdbcType=VARCHAR},
+        web_url = #{webUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPageList" resultType="com.wisea.yysc.common.vo.product.ApplicationVisitMagePageListVo" parameterType="com.wisea.yysc.common.po.product.ApplicationVisitMagePageListPo" >
+    select
+      id id,
+      unit_num unitNum,
+      application_name applicationName,
+      application_type applicationType,
+      sort sort,
+      application_url applicationUrl,
+      android_load_url androidLoadUrl,
+      android_qr_load_url androidQrLoadUrl,
+      apple_load_url appleLoadUrl,
+      apple_qr_load_url appleQrLoadUrl,
+      applets_load_url appletsLoadUrl,
+      applets_qr_load_url appletsQrLoadUrl,
+      web_url webUrl
+    from
+      application_visit_mage
+    where
+      del_flag = '0'
+    <if test="applicationName != null and applicationName != ''">
+      and  application_name like concat('%',#{applicationName},'%')
+      or unit_num like concat('%',#{applicationName},'%')
+    </if>
+    <if test="applicationType != null and applicationType != ''">
+      and  application_type = #{applicationType}
+    </if>
+    order by sort
+  </select>
+  <select id="findInfo" resultType="com.wisea.yysc.common.vo.product.ApplicationVisitMageInfoVo" parameterType="java.lang.Long" >
+    select
+      id id,
+      unit_num unitNum,
+      application_name applicationName,
+      application_type applicationType,
+      sort sort,
+      application_url applicationUrl,
+      android_load_url androidLoadUrl,
+      android_qr_load_url androidQrLoadUrl,
+      apple_load_url appleLoadUrl,
+      apple_qr_load_url appleQrLoadUrl,
+      applets_load_url appletsLoadUrl,
+      applets_qr_load_url appletsQrLoadUrl,
+      web_url webUrl,
+      remarks remarks
+    from
+      application_visit_mage
+    where
+      del_flag = '0'
+      and id = #{id}
+  </select>
+<!--  查看重复编码-->
+  <select id="findUnitNum" resultType="com.wisea.yysc.common.vo.product.ApplicationVisitMageInfoVo">
+    select
+      id id,
+      unit_num unitNum
+    from
+      application_visit_mage
+    where
+      del_flag = '0'
+      and unit_num = #{unitNum}
+  </select>
+</mapper>

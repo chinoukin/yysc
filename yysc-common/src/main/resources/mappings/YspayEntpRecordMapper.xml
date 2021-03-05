@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.YspayEntpRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="usercode" property="usercode" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="custid" property="custid" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="cust_statue" property="custStatue" jdbcType="VARCHAR" />
+    <result column="is_need_contract" property="isNeedContract" jdbcType="VARCHAR" />
+    <result column="merchant_no" property="merchantNo" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="online_url" property="onlineUrl" jdbcType="VARCHAR" />
+    <result column="offline_url" property="offlineUrl" jdbcType="VARCHAR" />
+    <result column="notify_type" property="notifyType" jdbcType="VARCHAR" />
+    <result column="notify_time" property="notifyTime" jdbcType="VARCHAR" />
+    <result column="notify_status" property="notifyStatus" jdbcType="CHAR" />
+    <result column="approval_status" property="approvalStatus" jdbcType="CHAR" />
+    <result column="approval_msg" property="approvalMsg" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, usercode, custname, custid, user_status, createtime, cust_statue, is_need_contract, 
+    merchant_no, note, online_url, offline_url, notify_type, notify_time, notify_status, 
+    approval_status, approval_msg, create_by, create_date, update_by, update_date, remarks, 
+    del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from yspay_entp_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from yspay_entp_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    insert into yspay_entp_record (id, usercode, custname, 
+      custid, user_status, createtime, 
+      cust_statue, is_need_contract, merchant_no, 
+      note, online_url, offline_url, 
+      notify_type, notify_time, notify_status, 
+      approval_status, approval_msg, create_by, 
+      create_date, update_by, update_date, 
+      remarks, del_flag)
+    values (#{id,jdbcType=BIGINT}, #{usercode,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, 
+      #{custid,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, 
+      #{custStatue,jdbcType=VARCHAR}, #{isNeedContract,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{onlineUrl,jdbcType=VARCHAR}, #{offlineUrl,jdbcType=VARCHAR}, 
+      #{notifyType,jdbcType=VARCHAR}, #{notifyTime,jdbcType=VARCHAR}, #{notifyStatus,jdbcType=CHAR}, 
+      #{approvalStatus,jdbcType=CHAR}, #{approvalMsg,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    insert into yspay_entp_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="usercode != null" >
+        usercode,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="custid != null" >
+        custid,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="custStatue != null" >
+        cust_statue,
+      </if>
+      <if test="isNeedContract != null" >
+        is_need_contract,
+      </if>
+      <if test="merchantNo != null" >
+        merchant_no,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="onlineUrl != null" >
+        online_url,
+      </if>
+      <if test="offlineUrl != null" >
+        offline_url,
+      </if>
+      <if test="notifyType != null" >
+        notify_type,
+      </if>
+      <if test="notifyTime != null" >
+        notify_time,
+      </if>
+      <if test="notifyStatus != null" >
+        notify_status,
+      </if>
+      <if test="approvalStatus != null" >
+        approval_status,
+      </if>
+      <if test="approvalMsg != null" >
+        approval_msg,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="custid != null" >
+        #{custid,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="custStatue != null" >
+        #{custStatue,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedContract != null" >
+        #{isNeedContract,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNo != null" >
+        #{merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineUrl != null" >
+        #{onlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineUrl != null" >
+        #{offlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyType != null" >
+        #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyTime != null" >
+        #{notifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyStatus != null" >
+        #{notifyStatus,jdbcType=CHAR},
+      </if>
+      <if test="approvalStatus != null" >
+        #{approvalStatus,jdbcType=CHAR},
+      </if>
+      <if test="approvalMsg != null" >
+        #{approvalMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    update yspay_entp_record
+    <set >
+      <if test="usercode != null" >
+        usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="custid != null" >
+        custid = #{custid,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="custStatue != null" >
+        cust_statue = #{custStatue,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedContract != null" >
+        is_need_contract = #{isNeedContract,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNo != null" >
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineUrl != null" >
+        online_url = #{onlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineUrl != null" >
+        offline_url = #{offlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyType != null" >
+        notify_type = #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyStatus != null" >
+        notify_status = #{notifyStatus,jdbcType=CHAR},
+      </if>
+      <if test="approvalStatus != null" >
+        approval_status = #{approvalStatus,jdbcType=CHAR},
+      </if>
+      <if test="approvalMsg != null" >
+        approval_msg = #{approvalMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    update yspay_entp_record
+    set usercode = #{usercode,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      custid = #{custid,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      cust_statue = #{custStatue,jdbcType=VARCHAR},
+      is_need_contract = #{isNeedContract,jdbcType=VARCHAR},
+      merchant_no = #{merchantNo,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      online_url = #{onlineUrl,jdbcType=VARCHAR},
+      offline_url = #{offlineUrl,jdbcType=VARCHAR},
+      notify_type = #{notifyType,jdbcType=VARCHAR},
+      notify_time = #{notifyTime,jdbcType=VARCHAR},
+      notify_status = #{notifyStatus,jdbcType=CHAR},
+      approval_status = #{approvalStatus,jdbcType=CHAR},
+      approval_msg = #{approvalMsg,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPage" resultType="com.wisea.yysc.common.vo.YspayEntpRecordListVo" parameterType="com.wisea.yysc.common.po.YspayEntpRecordPagePo" >
+    select 
+    <include refid="Base_Column_List" />
+    from yspay_entp_record
+    where del_flag = '0'
+  </select>
+  <select id="findList" resultType="com.wisea.yysc.common.vo.YspayEntpRecordListVo" parameterType="com.wisea.yysc.common.po.YspayEntpRecordListPo" >
+    select 
+    <include refid="Base_Column_List" />
+    from yspay_entp_record
+    where del_flag = '0'
+  </select>
+  <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.YspayEntpRecord" >
+    update yspay_entp_record
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

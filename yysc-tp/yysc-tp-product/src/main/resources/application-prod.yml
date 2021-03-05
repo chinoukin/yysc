@@ -1,0 +1,8 @@
+logging: # 日志输出配置
+  level:
+    com.wisea.yysc.common.dao: trace
+
+wbfc:
+  swaggerui:
+    enable: true
+    title: 新盟风控果品产业互联网综合服务平台-交易服务-商品平台

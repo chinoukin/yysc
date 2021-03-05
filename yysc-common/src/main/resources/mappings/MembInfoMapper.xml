@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.MembInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.MembInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="logo_url" property="logoUrl" jdbcType="VARCHAR" />
+    <result column="regist_tel" property="registTel" jdbcType="VARCHAR" />
+    <result column="pet_name" property="petName" jdbcType="VARCHAR" />
+    <result column="cont_name" property="contName" jdbcType="VARCHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="entp_name" property="entpName" jdbcType="VARCHAR" />
+    <result column="acct_state" property="acctState" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="area_prov" property="areaProv" jdbcType="VARCHAR" />
+    <result column="area_city" property="areaCity" jdbcType="VARCHAR" />
+    <result column="area_cou" property="areaCou" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="conter" property="conter" jdbcType="VARCHAR" />
+    <result column="cont_tel" property="contTel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="regist_date" property="registDate" jdbcType="TIMESTAMP" />
+    <result column="business_scale" property="businessScale" jdbcType="VARCHAR" />
+    <result column="memb_type" property="membType" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, logo_url, regist_tel, pet_name, cont_name, login_name, entp_name, acct_state, 
+    industry, area_prov, area_city, area_cou, address, conter, cont_tel, email, regist_date, 
+    business_scale, memb_type, create_by, create_date, update_by, update_date, remarks, 
+    del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from memb_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from memb_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.MembInfo" >
+    insert into memb_info (id, logo_url, regist_tel, 
+      pet_name, cont_name, login_name, 
+      entp_name, acct_state, industry, 
+      area_prov, area_city, area_cou, 
+      address, conter, cont_tel, 
+      email, regist_date, business_scale, 
+      memb_type, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=BIGINT}, #{logoUrl,jdbcType=VARCHAR}, #{registTel,jdbcType=VARCHAR}, 
+      #{petName,jdbcType=VARCHAR}, #{contName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{entpName,jdbcType=VARCHAR}, #{acctState,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{areaProv,jdbcType=VARCHAR}, #{areaCity,jdbcType=VARCHAR}, #{areaCou,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{conter,jdbcType=VARCHAR}, #{contTel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{registDate,jdbcType=TIMESTAMP}, #{businessScale,jdbcType=VARCHAR}, 
+      #{membType,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.MembInfo" >
+    insert into memb_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logoUrl != null" >
+        logo_url,
+      </if>
+      <if test="registTel != null" >
+        regist_tel,
+      </if>
+      <if test="petName != null" >
+        pet_name,
+      </if>
+      <if test="contName != null" >
+        cont_name,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="entpName != null" >
+        entp_name,
+      </if>
+      <if test="acctState != null" >
+        acct_state,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="areaProv != null" >
+        area_prov,
+      </if>
+      <if test="areaCity != null" >
+        area_city,
+      </if>
+      <if test="areaCou != null" >
+        area_cou,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="conter != null" >
+        conter,
+      </if>
+      <if test="contTel != null" >
+        cont_tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="registDate != null" >
+        regist_date,
+      </if>
+      <if test="businessScale != null" >
+        business_scale,
+      </if>
+      <if test="membType != null" >
+        memb_type,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="logoUrl != null" >
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="registTel != null" >
+        #{registTel,jdbcType=VARCHAR},
+      </if>
+      <if test="petName != null" >
+        #{petName,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null" >
+        #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="entpName != null" >
+        #{entpName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctState != null" >
+        #{acctState,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="areaProv != null" >
+        #{areaProv,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCity != null" >
+        #{areaCity,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCou != null" >
+        #{areaCou,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="conter != null" >
+        #{conter,jdbcType=VARCHAR},
+      </if>
+      <if test="contTel != null" >
+        #{contTel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="registDate != null" >
+        #{registDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessScale != null" >
+        #{businessScale,jdbcType=VARCHAR},
+      </if>
+      <if test="membType != null" >
+        #{membType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.MembInfo" >
+    update memb_info
+    <set >
+      <if test="logoUrl != null" >
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="registTel != null" >
+        regist_tel = #{registTel,jdbcType=VARCHAR},
+      </if>
+      <if test="petName != null" >
+        pet_name = #{petName,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null" >
+        cont_name = #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="entpName != null" >
+        entp_name = #{entpName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctState != null" >
+        acct_state = #{acctState,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="areaProv != null" >
+        area_prov = #{areaProv,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCity != null" >
+        area_city = #{areaCity,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCou != null" >
+        area_cou = #{areaCou,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="conter != null" >
+        conter = #{conter,jdbcType=VARCHAR},
+      </if>
+      <if test="contTel != null" >
+        cont_tel = #{contTel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="registDate != null" >
+        regist_date = #{registDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessScale != null" >
+        business_scale = #{businessScale,jdbcType=VARCHAR},
+      </if>
+      <if test="membType != null" >
+        memb_type = #{membType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.MembInfo" >
+    update memb_info
+    set logo_url = #{logoUrl,jdbcType=VARCHAR},
+      regist_tel = #{registTel,jdbcType=VARCHAR},
+      pet_name = #{petName,jdbcType=VARCHAR},
+      cont_name = #{contName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      entp_name = #{entpName,jdbcType=VARCHAR},
+      acct_state = #{acctState,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      area_prov = #{areaProv,jdbcType=VARCHAR},
+      area_city = #{areaCity,jdbcType=VARCHAR},
+      area_cou = #{areaCou,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      conter = #{conter,jdbcType=VARCHAR},
+      cont_tel = #{contTel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      regist_date = #{registDate,jdbcType=TIMESTAMP},
+      business_scale = #{businessScale,jdbcType=VARCHAR},
+      memb_type = #{membType,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPage" resultType="com.wisea.yysc.common.vo.MembInfoListVo" parameterType="com.wisea.yysc.common.po.MembInfoPagePo" >
+    select 
+     id, cont_name, login_name, acct_state, cont_tel
+    from memb_info
+    where del_flag = '0'
+    <if test="val != null and val != ''">
+      AND (login_name LIKE CONCAT('%', #{val}, '%')
+      OR cont_name LIKE CONCAT('%', #{val}, '%'))
+    </if>
+    and create_by = #{createBy}
+    and memb_type = '1'
+    order by update_date desc
+  </select>
+  <select id="findList" resultType="com.wisea.yysc.common.vo.MembInfoListVo" parameterType="com.wisea.yysc.common.po.MembInfoListPo" >
+    select 
+    <include refid="Base_Column_List" />
+    from memb_info
+    where del_flag = '0'
+  </select>
+
+    <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.MembInfo" >
+    update memb_info
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   <!-- 根据id获取会员的基本信息-->
+   <select id="getMembBaseDetail" resultType="com.wisea.yysc.common.vo.memb.MembBaseDetailVo">
+      select
+      id,logo_url,cont_name,email
+      from memb_info
+      where id = #{id,jdbcType=BIGINT}
+   </select>
+   <!--  分页查询应用市场用户列表信息-->
+  <select id="findAppMarketUserPageList" resultType="com.wisea.yysc.common.vo.AppMarketUserListVo" parameterType="com.wisea.yysc.common.po.AppMarketUserPagePo">
+    SELECT
+        mi.id,
+        @rownum := @rownum + 1 AS rownum,
+        mi.regist_tel,
+        oii.appSum,
+        mi.acct_state,
+        mi.regist_date,
+        mi.cont_name,
+        mi.entp_name
+    FROM
+        memb_info mi
+        LEFT JOIN (
+        SELECT
+            COUNT(1) appSum,
+            oi.buyer_id
+        FROM
+            order_info oi
+            WHERE
+            del_flag = '0'
+            AND order_state_type = '4'
+            AND
+        oi.valid_end_date <![CDATA[ >= ]]> NOW()
+      GROUP BY oi.buyer_id,oi.comm_pub_id
+    )oii ON
+    oii.buyer_id = mi.id,( SELECT @rownum := 0 ) r
+    WHERE mi.del_flag= '0'
+    and mi.memb_type = '0'
+      <if test="list != null and list.size > 0">
+        and mi.id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+      <if test="registTel != null and registTel != ''">
+        and mi.regist_tel  = #{registTel}
+      </if>
+      <if test="registDate != null">
+        and DATE_FORMAT(mi.regist_date,'%Y-%m-%d') = DATE_FORMAT(#{registDate},'%Y-%m-%d')
+      </if>
+    ORDER BY mi.update_date DESC
+  </select>
+  <select id="checkMobileExist" resultType="java.lang.Integer" parameterType="com.wisea.yysc.common.po.memb.MembCheckMobilePo">
+    SELECT COUNT(*)  FROM memb_info T1
+    WHERE T1.regist_tel= #{mobile}
+    <if test="membId != null and membId != ''">
+      AND T1.id NOT IN(#{membId})
+    </if>
+    and T1.memb_type = '0'
+  </select>
+   <!-- 会员基础信息（应用市场用户专用） -->
+  <select id="findMemberInfo" resultType="com.wisea.yysc.common.vo.FindMembInfoVo">
+      select
+      id, regist_tel, regist_date, entp_name, acct_state, industry,
+      address, business_scale, conter, email
+      from memb_info
+      where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="loginCheck" resultType="com.wisea.yysc.common.entity.MembInfo" parameterType="com.wisea.yysc.common.po.memb.LoginNameOrMobilePo">
+      select
+      <include refid="Base_Column_List" />
+      from memb_info
+      where del_flag = '0'
+      AND (
+      <if test="loginName != null and loginName != '' and mobile != null and mobile != ''">
+        login_name = #{loginName}
+        OR regist_tel = #{mobile}
+      </if>
+      )
+    </select>
+    <select id="getMembInfoByRegTel" parameterType="java.lang.String"
+          resultType="com.wisea.yysc.common.entity.MembInfo">
+    	SELECT T1.* FROM memb_info T1
+		WHERE T1.regist_tel=#{_paremeter} and T1.del_flag ='0'
+    </select>
+  <!-- 验证用户名称是否已经存在 -->
+  <select id="checkLoginNameExist" parameterType="com.wisea.yysc.common.po.memb.MembCheckLoginNamePo"
+          resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM(
+    SELECT id,login_name FROM memb_info WHERE del_flag = '0'
+    ) tab
+    WHERE tab.login_name = #{loginName}
+    <if test="membId != null and membId != ''">
+      AND tab.id NOT IN(#{membId})
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,26 @@
+server:
+  port: 8944
+#  servlet:
+#    context-path: /tp/system
+spring:
+  application:
+    name: yysc-tp-system
+
+wbfc:
+  swaggerui:
+    enable: true
+    title: 新盟风控-应用市场-系统设置服务
+  mss:
+    security: YYSC-OPERATION # mss远程 安全服务(用户、菜单、角色)
+
+management:
+  endpoint:
+    logviewer:
+      enabled: true # 开启实时日志节点
+
+logging: # 日志输出配置
+  level:
+    com.wisea: DEBUG
+    org.quartz: debug
+    com.codingapi: debug
+

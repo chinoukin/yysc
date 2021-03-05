@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.CommPubInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.CommPubInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comm_id" property="commId" jdbcType="BIGINT" />
+    <result column="memb_id" property="membId" jdbcType="BIGINT" />
+    <result column="comm_title" property="commTitle" jdbcType="VARCHAR" />
+    <result column="application_visit_id" property="applicationVisitId" jdbcType="BIGINT" />
+    <result column="Recommend" property="recommend" jdbcType="VARCHAR" />
+    <result column="pay_method_type" property="payMethodType" jdbcType="VARCHAR" />
+    <result column="brand_mage_id" property="brandMageId" jdbcType="BIGINT" />
+    <result column="comm_state_type" property="commStateType" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="InfoResultMap" type="com.wisea.yysc.common.vo.product.CommPubInfoInfoVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comm_id" property="commId" jdbcType="BIGINT" />
+    <result column="memb_id" property="membId" jdbcType="BIGINT" />
+    <result column="comm_title" property="commTitle" jdbcType="VARCHAR" />
+    <result column="application_visit_id" property="applicationVisitId" jdbcType="BIGINT" />
+    <result column="Recommend" property="recommend" jdbcType="VARCHAR" />
+    <result column="pay_method_type" property="payMethodType" jdbcType="VARCHAR" />
+    <result column="brand_mage_id" property="brandMageId" jdbcType="BIGINT" />
+    <result column="comm_state_type" property="commStateType" jdbcType="VARCHAR" />
+    <result column="application_details" property="applicationDetails" jdbcType="LONGVARCHAR" />
+    <result column="maxPrice" property="maxPrice" jdbcType="DOUBLE" />
+    <result column="minPrice" property="minPrice" jdbcType="DOUBLE" />
+    <collection property="pictures" ofType="com.wisea.yysc.common.vo.CommPictureListVo">
+      <id column="cpid" property="id" jdbcType="BIGINT" />
+      <result column="url" property="url" jdbcType="VARCHAR"/>
+      <result column="comm_picture_type" property="commPictureType" jdbcType="VARCHAR"/>
+    </collection>
+    <collection property="levelSpecQuotes" ofType="com.wisea.yysc.common.vo.LevelSpecQuoteListVo">
+      <id column="lsqid" property="id" jdbcType="BIGINT" />
+      <result column="spec_name" property="specName" jdbcType="VARCHAR" />
+      <result column="sfyxsy_flag" property="sfyxsyFlag" jdbcType="CHAR" />
+      <result column="trial_days" property="trialDays" jdbcType="INTEGER" />
+      <result column="dimensions_type" property="dimensionsType" jdbcType="VARCHAR" />
+      <result column="price" property="price" jdbcType="DOUBLE" />
+      <result column="meas_unit_id" property="measUnitId" jdbcType="BIGINT" />
+      <result column="mummeas_unit_name" property="measUnitName" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="commAttris" ofType="com.wisea.yysc.common.vo.CommAttriListVo">
+      <id column="caid" property="id" jdbcType="BIGINT" />
+      <result column="comm_attri_name" property="commAttriName" jdbcType="VARCHAR" />
+      <result column="comm_attri_column" property="commAttriColumn" jdbcType="VARCHAR" />
+      <result column="comm_attri_type" property="commAttriType" jdbcType="VARCHAR" />
+      <result column="comm_attri_val" property="commAttriVal" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wisea.yysc.common.entity.CommPubInfo" extends="BaseResultMap" >
+    <result column="application_details" property="applicationDetails" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comm_id, memb_id, comm_title, application_visit_id, Recommend, pay_method_type, 
+    brand_mage_id, comm_state_type, create_by, create_date, update_by, update_date, remarks, 
+    del_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    application_details
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comm_pub_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from comm_pub_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.CommPubInfo" >
+    insert into comm_pub_info (id, comm_id, memb_id,
+                               comm_title, application_visit_id, Recommend,
+                               pay_method_type, brand_mage_id, comm_state_type,
+                               create_by, create_date, update_by,
+                               update_date, remarks, del_flag,
+                               application_details)
+    values (#{id,jdbcType=BIGINT}, #{commId,jdbcType=BIGINT}, #{membId,jdbcType=BIGINT},
+            #{commTitle,jdbcType=VARCHAR}, #{applicationVisitId,jdbcType=BIGINT}, #{recommend,jdbcType=VARCHAR},
+            #{payMethodType,jdbcType=VARCHAR}, #{brandMageId,jdbcType=BIGINT}, #{commStateType,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+            #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR},
+            #{applicationDetails,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.CommPubInfo" >
+    insert into comm_pub_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commId != null" >
+        comm_id,
+      </if>
+      <if test="membId != null" >
+        memb_id,
+      </if>
+      <if test="commTitle != null" >
+        comm_title,
+      </if>
+      <if test="applicationVisitId != null" >
+        application_visit_id,
+      </if>
+      <if test="recommend != null" >
+        Recommend,
+      </if>
+      <if test="payMethodType != null" >
+        pay_method_type,
+      </if>
+      <if test="brandMageId != null" >
+        brand_mage_id,
+      </if>
+      <if test="commStateType != null" >
+        comm_state_type,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="applicationDetails != null" >
+        application_details,
+      </if>
+      <if test="loginType != null" >
+        login_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commId != null" >
+        #{commId,jdbcType=BIGINT},
+      </if>
+      <if test="membId != null" >
+        #{membId,jdbcType=BIGINT},
+      </if>
+      <if test="commTitle != null" >
+        #{commTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationVisitId != null" >
+        #{applicationVisitId,jdbcType=BIGINT},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodType != null" >
+        #{payMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="brandMageId != null" >
+        #{brandMageId,jdbcType=BIGINT},
+      </if>
+      <if test="commStateType != null" >
+        #{commStateType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="applicationDetails != null" >
+        #{applicationDetails,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="loginType != null" >
+        #{loginType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.CommPubInfo" >
+    update comm_pub_info
+    <set >
+      <if test="commId != null" >
+        comm_id = #{commId,jdbcType=BIGINT},
+      </if>
+      <if test="membId != null" >
+        memb_id = #{membId,jdbcType=BIGINT},
+      </if>
+      <if test="commTitle != null" >
+        comm_title = #{commTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationVisitId != null" >
+        application_visit_id = #{applicationVisitId,jdbcType=BIGINT},
+      </if>
+      <if test="recommend != null" >
+        Recommend = #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodType != null" >
+        pay_method_type = #{payMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="brandMageId != null" >
+        brand_mage_id = #{brandMageId,jdbcType=BIGINT},
+      </if>
+      <if test="commStateType != null" >
+        comm_state_type = #{commStateType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="applicationDetails != null" >
+        application_details = #{applicationDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.CommPubInfo" >
+    update comm_pub_info
+    set comm_id = #{commId,jdbcType=BIGINT},
+        memb_id = #{membId,jdbcType=BIGINT},
+        comm_title = #{commTitle,jdbcType=VARCHAR},
+        application_visit_id = #{applicationVisitId,jdbcType=BIGINT},
+        Recommend = #{recommend,jdbcType=VARCHAR},
+        pay_method_type = #{payMethodType,jdbcType=VARCHAR},
+        brand_mage_id = #{brandMageId,jdbcType=BIGINT},
+        comm_state_type = #{commStateType,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        remarks = #{remarks,jdbcType=VARCHAR},
+        del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findPageList" resultType="com.wisea.yysc.common.vo.product.CommPubInfoPageListVo" parameterType="com.wisea.yysc.common.po.product.CommPubInfoPageListPo" >
+    select
+    cpi.id id,
+    comm_id commId,
+    memb_id membId,
+    comm_title commTitle,
+    application_visit_id applicationVisitId,
+    Recommend recommend,
+    pay_method_type payMethodType,
+    brand_mage_id brandMageId,
+    comm_state_type commStateType,
+    cp.url pictureUrl,
+    avm.unit_num unitNum,
+    (select IFNULL(ROUND(sum(comm_total_count), 0),0) volume from order_info where pay_ord_date is not null ) as volume,
+    maxPrice,
+    minPrice
+    from
+    comm_pub_info cpi
+    left join application_visit_mage avm on cpi.application_visit_id=avm.id
+    left join comm_picture cp on cp.comm_pub_id=cpi.id
+    left join (select max(price) as maxPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq on lsq.comm_pub_id=cpi.id
+    left join (select min(price) as minPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq1 on lsq1.comm_pub_id=cpi.id
+    where
+    cpi.del_flag = '0'
+    and cp.comm_picture_type='0'
+    <if test="standardTypeQuery!=null and standardTypeQuery!=''">
+      and cpi.comm_title like concat('%',#{standardTypeQuery},'%')
+      or avm.unit_num = #{standardTypeQuery}
+    </if>
+    <if test="commStateType!=null and commStateType!='' ">
+      and comm_state_type=#{commStateType}
+    </if>
+    <if test="commId!=null and commId!='' ">
+      and comm_id=#{commId};
+    </if>
+  </select>
+  <select id="findInfo" resultMap="InfoResultMap" parameterType="java.lang.Long" >
+    select distinct cpi.id,
+                    comm_id,
+                    memb_id,
+                    comm_title,
+                    application_visit_id,
+                    Recommend,
+                    pay_method_type,
+                    brand_mage_id,
+                    comm_state_type,
+                    application_details,
+                    lsq.id lsqid,
+                    lsq.price,
+                    lsq.spec_name,
+                    lsq.dimensions_type,
+                    lsq.sfyxsy_flag,
+                    lsq.trial_days,
+                    lsq.meas_unit_id,
+                    mum.meas_unit_name mummeas_unit_name,
+                    cp.id  cpid,
+                    cp.url,
+                    cp.comm_picture_type,
+                    ca.id  caid,
+                    ca.comm_attri_name,
+                    ca.comm_attri_column,
+                    ca.comm_attri_type,
+                    ca.comm_attri_val,
+                    maxPrice,
+                    minPrice
+    from comm_pub_info cpi
+           left join level_spec_quote lsq on cpi.id = lsq.comm_pub_id
+           left join comm_picture cp on cpi.id = cp.comm_pub_id
+           left join comm_attri ca on cpi.id = ca.comm_pub_id
+           left join meas_unit_mage mum on lsq.meas_unit_id = mum.id
+           left join (select max(price) as maxPrice, comm_pub_id from level_spec_quote group by comm_pub_id) lsq1
+                     on lsq1.comm_pub_id = cpi.id
+           left join (select min(price) as minPrice, comm_pub_id from level_spec_quote group by comm_pub_id) lsq2
+                     on lsq2.comm_pub_id = cpi.id
+    where cpi.del_flag = '0'
+      and cpi.id = #{id};
+
+
+  </select>
+<!--  上下架操作-->
+  <update id="batchDel">
+    update comm_pub_info set comm_state_type=#{state}
+    <where>
+      and 1=1
+      and id in
+           <foreach item="item" collection="ids" separator="," open="(" close=")" index="index">
+             #{item}
+           </foreach>
+    </where>
+  </update>
+<select id="findTopThree"  resultType="com.wisea.yysc.common.vo.product.CommPubInfoPageListVo">
+  select cpi.id id,cpi.comm_title commTitle,maxPrice,minPrice,
+         (select IFNULL(ROUND(sum(comm_total_count), 2), 0) volume
+          from order_info
+          where pay_ord_date is not null) as volume
+  from comm_pub_info cpi
+         left join comm_picture cp on cp.comm_pub_id = cpi.id
+        left join comm_mage cm on cm.id=cpi.comm_id
+         left join (select max(price) as maxPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq on lsq.comm_pub_id=cpi.id
+         left join (select min(price) as minPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq1 on lsq1.comm_pub_id=cpi.id
+  where cpi.del_flag = '0'
+    and cp.comm_picture_type = '0'
+    and cm.pid=#{commId}
+  order by volume desc
+  limit 3;
+
+</select>
+<!--  查找应用访问配置-->
+  <select id="findApplicationVisit" resultType="com.wisea.yysc.common.vo.ApplicationVisitMageListVo">
+    select avm.id id, CONCAT(unit_num, ' ', application_name) as name
+    from application_visit_mage avm
+    where avm.del_flag = '0';
+
+  </select>
+<!--  web端应用列表-->
+  <select id="findWebPageList" resultType="com.wisea.yysc.common.vo.product.CommPubInfoPageListVo" parameterType="com.wisea.yysc.common.po.product.CommPubInfoPageListPo">
+    select
+    (select comm_catg_name from comm_mage where id=cm.pid) as commTitle,cpi.id id,
+    (select IFNULL(ROUND(sum(comm_total_count), 0),0) volume from order_info where pay_ord_date is not null ) as volume,
+    maxPrice,
+    minPrice
+    from
+    comm_pub_info cpi
+    left join comm_picture cp on cp.comm_pub_id=cpi.id
+    left join comm_mage cm on cpi.comm_id = cm.id
+    left join (select max(price) as maxPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq on lsq.comm_pub_id=cpi.id
+    left join (select min(price) as minPrice,comm_pub_id from level_spec_quote  group by comm_pub_id) lsq1 on lsq1.comm_pub_id=cpi.id
+    where
+    cpi.del_flag = '0'
+    and cp.comm_picture_type='0'
+    and comm_state_type='0'
+    <if test="commTitle!=null and commTitle!='' ">
+      and cpi.comm_title like concat('%',#{commTitle},'%')
+      or cpi.Recommend like concat('%',#{commTitle},'%')
+    </if>
+    order by volume
+  </select>
+  <select id="batchSelect" resultType="com.wisea.yysc.common.entity.CommPubInfo">
+    select * from comm_pub_info
+    <where>
+      and 1=1
+      <if test="state!=null and state!='' ">
+        and comm_state_type = #{state}
+      </if>
+      and id in
+      <foreach item="item" collection="ids" separator="," open="(" close=")" index="index">
+        #{item}
+      </foreach>
+    </where>
+  </select>
+</mapper>

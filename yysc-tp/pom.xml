@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>yysc-tp</artifactId>
+  <packaging>pom</packaging>
+
+  <name>yysc-tp</name>
+  <description>新盟风控应用市场服务</description>
+
+  <parent>
+    <groupId>com.wisea</groupId>
+    <artifactId>yysc</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <profiles>
+    <profile>
+      <id>full-build</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>yysc-tp-product</module>
+        <module>yysc-tp-system</module>
+        <module>yysc-tp-trade</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>ci</id>
+    </profile>
+    <profile>
+      <id>boot</id>
+      <modules>
+        <module>yysc-tp-product</module>
+        <module>yysc-tp-system</module>
+        <module>yysc-tp-trade</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>

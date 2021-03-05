@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.LevelSpecQuoteMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comm_pub_id" property="commPubId" jdbcType="BIGINT" />
+    <result column="spec_name" property="specName" jdbcType="VARCHAR" />
+    <result column="sfyxsy_flag" property="sfyxsyFlag" jdbcType="CHAR" />
+    <result column="trial_days" property="trialDays" jdbcType="INTEGER" />
+    <result column="dimensions_type" property="dimensionsType" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="meas_unit_id" property="measUnitId" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comm_pub_id, spec_name, sfyxsy_flag, trial_days, dimensions_type, price,meas_unit_id, create_by,
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from level_spec_quote
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from level_spec_quote
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    insert into level_spec_quote (id, comm_pub_id, spec_name, 
+      sfyxsy_flag, trial_days, dimensions_type, 
+      price, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=BIGINT}, #{commPubId,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR}, 
+      #{sfyxsyFlag,jdbcType=CHAR}, #{trialDays,jdbcType=INTEGER}, #{dimensionsType,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+
+  <insert id="batchInsert" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    insert into level_spec_quote (id, comm_pub_id, spec_name,
+                                  sfyxsy_flag, trial_days, dimensions_type,
+                                  price, create_by, create_date,
+                                  update_by, update_date, remarks,
+                                  del_flag)
+    values <foreach collection ="list" item="info" separator="," >
+           (#{info.id,jdbcType=BIGINT}, #{info.commPubId,jdbcType=BIGINT}, #{info.specName,jdbcType=VARCHAR},
+            #{info.sfyxsyFlag,jdbcType=CHAR}, #{info.trialDays,jdbcType=INTEGER}, #{info.dimensionsType,jdbcType=VARCHAR},
+            #{info.price,jdbcType=DOUBLE}, #{info.createBy,jdbcType=VARCHAR}, #{info.createDate,jdbcType=TIMESTAMP},
+            #{info.updateBy,jdbcType=VARCHAR}, #{info.updateDate,jdbcType=TIMESTAMP}, #{info.remarks,jdbcType=VARCHAR},
+            #{info.delFlag,jdbcType=CHAR})
+  </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    insert into level_spec_quote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commPubId != null" >
+        comm_pub_id,
+      </if>
+      <if test="specName != null" >
+        spec_name,
+      </if>
+      <if test="sfyxsyFlag != null" >
+        sfyxsy_flag,
+      </if>
+      <if test="trialDays != null" >
+        trial_days,
+      </if>
+      <if test="dimensionsType != null" >
+        dimensions_type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commPubId != null" >
+        #{commPubId,jdbcType=BIGINT},
+      </if>
+      <if test="specName != null" >
+        #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyxsyFlag != null" >
+        #{sfyxsyFlag,jdbcType=CHAR},
+      </if>
+      <if test="trialDays != null" >
+        #{trialDays,jdbcType=INTEGER},
+      </if>
+      <if test="dimensionsType != null" >
+        #{dimensionsType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    update level_spec_quote
+    <set >
+      <if test="commPubId != null" >
+        comm_pub_id = #{commPubId,jdbcType=BIGINT},
+      </if>
+      <if test="specName != null" >
+        spec_name = #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyxsyFlag != null" >
+        sfyxsy_flag = #{sfyxsyFlag,jdbcType=CHAR},
+      </if>
+      <if test="trialDays != null" >
+        trial_days = #{trialDays,jdbcType=INTEGER},
+      </if>
+      <if test="dimensionsType != null" >
+        dimensions_type = #{dimensionsType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    update level_spec_quote
+    set comm_pub_id = #{commPubId,jdbcType=BIGINT},
+      spec_name = #{specName,jdbcType=VARCHAR},
+      sfyxsy_flag = #{sfyxsyFlag,jdbcType=CHAR},
+      trial_days = #{trialDays,jdbcType=INTEGER},
+      dimensions_type = #{dimensionsType,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPage" resultType="com.wisea.yysc.common.vo.LevelSpecQuoteListVo" parameterType="com.wisea.yysc.common.po.LevelSpecQuotePagePo" >
+    select 
+    <include refid="Base_Column_List" />
+    from level_spec_quote
+    where del_flag = '0'
+  </select>
+  <select id="findList" resultType="com.wisea.yysc.common.vo.LevelSpecQuoteListVo" parameterType="com.wisea.yysc.common.po.LevelSpecQuoteListPo" >
+    select 
+    <include refid="Base_Column_List" />
+    from level_spec_quote
+    where del_flag = '0'
+  </select>
+  <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
+    update level_spec_quote
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="deleteByCommPubId" parameterType="java.lang.Long">
+    update level_spec_quote set del_flag='1' where comm_pub_id=#{id}
+  </update>
+  <!-- 修改删除计量单位前查看是否有规格在使用   -->
+  <select id="beforeDelSelectMeas" parameterType="java.lang.Long" resultType="com.wisea.yysc.common.vo.product.LevelSpecQuoteInfoVo">
+    SELECT id
+    FROM level_spec_quote
+    WHERE meas_unit_id = #{id}
+      AND del_flag = '0'
+  </select>
+</mapper>

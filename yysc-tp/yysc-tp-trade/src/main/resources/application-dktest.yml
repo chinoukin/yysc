@@ -1,0 +1,19 @@
+payconfig:
+  wechatpay:
+    appId: wx7650561dc89e59af  #服务号appID
+    mchId: 1452903402           #商户id
+    signType: MD5
+    secretKey: ef3dddc832ee41c1ff9346178d07bb96
+    apiDomain: https://api.mch.weixin.qq.com
+    notifyUrl: http://192.168.20.208:8910/tp/trade/wechatpay/notify
+    returnUrl: http://192.168.20.208:8910/marketplace-web/marketplace/paysSccess
+    certPath: certs/apiclient_cert.p12   # 包含了私钥信息的证书文件，退款接口时必须
+wbfc:
+  swaggerui:
+    enable: true
+    title: 应用市场-交易服务(买家买家操作流程、支付功能) #标题
+
+logging: # 日志输出配置
+  level:
+    com.wisea: DEBUG
+    org.quartz: debug

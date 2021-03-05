@@ -1,0 +1,77 @@
+server:
+  port: 8940
+
+spring:
+  profiles:
+    active: dev #标明默认激活的配置文件
+  application:
+    name: yysc-gateway
+  servlet:
+    multipart:
+      resolveLazily: true # 延迟文件解析
+      maxFileSize: -1 # 每一个文件的最大值，默认值1MB，-1表示没有限制。
+      maxRequestSize: -1 # 一次上传最大值，默认值为10MB， -1表示没有限制。
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #当访问http://网关地址/服务名称（大写）/**地址会自动转发到http://服务名称（大写）/**地址，如果为false就不会自动转发
+#          lowerCaseServiceId: true # 为true表示服务名称（小写）
+      routes:
+        - id: YYSC-OPERATION # 用户服务 系统服务 文件服务
+          uri: lb://YYSC-OPERATION
+          predicates:
+            - Path=/yysc/security/**
+          filters:
+            - StripPrefix=2
+        - id: YYSC-SYSTEM # 系统服务
+          uri: lb://YYSC-OPERATION
+          predicates:
+            - Path=/yysc/system/**
+          filters:
+            - StripPrefix=2
+        - id: YYSC-FILES # 文件服务
+          uri: lb://YYSC-OPERATION
+          predicates:
+            - Path=/yysc/files/**
+          filters:
+            - StripPrefix=2
+        - id: YYSC-TP-TRADE # 交易平台-交易服务
+          uri: lb://YYSC-TP-TRADE
+          predicates:
+            - Path=/yysc/tp/trade/**
+          filters:
+            - StripPrefix=3
+        - id: YYSC-TP-SYSTEM # 交易平台-系统服务(系统设置、物流模板、会员管理、地址管理)
+          uri: lb://YYSC-TP-SYSTEM
+          predicates:
+            - Path=/yysc/tp/system/**
+          filters:
+            - StripPrefix=3
+        - id: YYSC-TP-PRODUCT # 交易平台-商品服务(商品管理、搜索引擎)
+          uri: lb://YYSC-TP-PRODUCT
+          predicates:
+            - Path=/yysc/tp/product/**
+          filters:
+            - StripPrefix=3
+#关闭基于HTTP basic的认证
+# 网关的话，有三层的超时时间，一个是zuul的，一个是ribbon的，还有一个是hystrix的。
+#hystrix的超时设置AbstractRibbonCommand这个类没有暴露设置hystrix的Setter方法出来，所以无法通过继承的方式来扩展。
+#因此要自定义ribbon超时的话，需要这个超时时间是小于hystrix的，不然就提前被hystrix超时了，无法起到效果
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 800000 # 时间要大于ribbon的超时 否则会报警告
+
+ribbon:
+  ReadTimeout: 200000
+  ConnectTimeout: 20000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  eureka:
+    enabled: true

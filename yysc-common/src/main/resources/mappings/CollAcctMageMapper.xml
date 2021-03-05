@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisea.yysc.common.dao.CollAcctMageMapper" >
+  <resultMap id="BaseResultMap" type="com.wisea.yysc.common.entity.CollAcctMage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memb_id" property="membId" jdbcType="BIGINT" />
+    <result column="acct_name" property="acctName" jdbcType="VARCHAR" />
+    <result column="acct_num" property="acctNum" jdbcType="VARCHAR" />
+    <result column="bank_deposit" property="bankDeposit" jdbcType="VARCHAR" />
+    <result column="bank_prov" property="bankProv" jdbcType="VARCHAR" />
+    <result column="bank_city" property="bankCity" jdbcType="VARCHAR" />
+    <result column="bank_sub" property="bankSub" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, memb_id, acct_name, acct_num, bank_deposit, bank_prov, bank_city, bank_sub, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from coll_acct_mage
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from coll_acct_mage
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wisea.yysc.common.entity.CollAcctMage" >
+    insert into coll_acct_mage (id, memb_id, acct_name, 
+      acct_num, bank_deposit, bank_prov, 
+      bank_city, bank_sub, create_by, 
+      create_date, update_by, update_date, 
+      remarks, del_flag)
+    values (#{id,jdbcType=BIGINT}, #{membId,jdbcType=BIGINT}, #{acctName,jdbcType=VARCHAR}, 
+      #{acctNum,jdbcType=VARCHAR}, #{bankDeposit,jdbcType=VARCHAR}, #{bankProv,jdbcType=VARCHAR}, 
+      #{bankCity,jdbcType=VARCHAR}, #{bankSub,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.CollAcctMage" >
+    insert into coll_acct_mage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="membId != null" >
+        memb_id,
+      </if>
+      <if test="acctName != null" >
+        acct_name,
+      </if>
+      <if test="acctNum != null" >
+        acct_num,
+      </if>
+      <if test="bankDeposit != null" >
+        bank_deposit,
+      </if>
+      <if test="bankProv != null" >
+        bank_prov,
+      </if>
+      <if test="bankCity != null" >
+        bank_city,
+      </if>
+      <if test="bankSub != null" >
+        bank_sub,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="membId != null" >
+        #{membId,jdbcType=BIGINT},
+      </if>
+      <if test="acctName != null" >
+        #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctNum != null" >
+        #{acctNum,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDeposit != null" >
+        #{bankDeposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProv != null" >
+        #{bankProv,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null" >
+        #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankSub != null" >
+        #{bankSub,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisea.yysc.common.entity.CollAcctMage" >
+    update coll_acct_mage
+    <set >
+      <if test="membId != null" >
+        memb_id = #{membId,jdbcType=BIGINT},
+      </if>
+      <if test="acctName != null" >
+        acct_name = #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="acctNum != null" >
+        acct_num = #{acctNum,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDeposit != null" >
+        bank_deposit = #{bankDeposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProv != null" >
+        bank_prov = #{bankProv,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null" >
+        bank_city = #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankSub != null" >
+        bank_sub = #{bankSub,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisea.yysc.common.entity.CollAcctMage" >
+    update coll_acct_mage
+    set memb_id = #{membId,jdbcType=BIGINT},
+      acct_name = #{acctName,jdbcType=VARCHAR},
+      acct_num = #{acctNum,jdbcType=VARCHAR},
+      bank_deposit = #{bankDeposit,jdbcType=VARCHAR},
+      bank_prov = #{bankProv,jdbcType=VARCHAR},
+      bank_city = #{bankCity,jdbcType=VARCHAR},
+      bank_sub = #{bankSub,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findPage" resultType="com.wisea.yysc.common.vo.CollAcctMageListVo" parameterType="com.wisea.yysc.common.po.CollAcctMagePagePo" >
+    select 
+    <include refid="Base_Column_List" />
+    from coll_acct_mage
+    where del_flag = '0'
+  </select>
+  <select id="findList" resultType="com.wisea.yysc.common.vo.CollAcctMageListVo" parameterType="com.wisea.yysc.common.po.CollAcctMageListPo" >
+    select 
+    <include refid="Base_Column_List" />
+    from coll_acct_mage
+    where del_flag = '0'
+  </select>
+  <select id="findInfo" resultType="com.wisea.yysc.common.vo.CollAcctMageGetVo">
+    select
+    <include refid="Base_Column_List" />
+    from coll_acct_mage
+  </select>
+  <update id="deleteLogic" parameterType="com.wisea.yysc.common.entity.CollAcctMage" >
+    update coll_acct_mage
+    set del_flag = '1',update_by = #{updateBy,jdbcType=VARCHAR},update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,157 @@
+package com.wisea.yysc.common.po;
+
+import com.wisea.cloud.model.annotation.Check;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * MeasUnitMageInsertPo
+ * 2021/01/26 16:30:07
+ */
+public class MeasUnitMageInsertPo {
+    /**
+     * 编号
+     */
+    @Check(test = { "maxLength" }, mixLength = 30)
+    @ApiModelProperty(value = "编号")
+    private String unitNum;
+
+    /**
+     * 计量单位名称
+     */
+    @Check(test = { "maxLength" }, mixLength = 32)
+    @ApiModelProperty(value = "计量单位名称")
+    private String measUnitName;
+
+    /**
+     * 排序
+     */
+    @Check(test = { "maxLength" }, length = 10)
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
+    /**
+     * 计量单位状态（有效、无效）
+     */
+    @Check(test = { "maxLength" }, mixLength = 5)
+    @ApiModelProperty(value = "计量单位状态（有效、无效）")
+    private String effeInvalState;
+
+    /**
+     * 所属量纲类型
+     */
+    @Check(test = { "maxLength" }, mixLength = 5)
+    @ApiModelProperty(value = "所属量纲类型")
+    private String dimensionsType;
+
+    /**
+     * 换算系数
+     */
+    @Check(test = { "regex" }, regex = "^0$|^(0\\.[0-9]+)$|^[1-9]\\d*(\\.[0-9]+)?$")
+    @ApiModelProperty(value = "换算系数")
+    private Double transXs;
+
+    /**
+     * 备注
+     */
+    @Check(test = { "maxLength" }, mixLength = 255)
+    @ApiModelProperty(value = "备注")
+    private String remarks;
+
+    /**
+     * 获取编号
+     */
+    public String getUnitNum() {
+        return unitNum;
+    }
+
+    /**
+     * 设置编号
+     */
+    public void setUnitNum(String unitNum) {
+        this.unitNum = unitNum == null ? null : unitNum.trim();
+    }
+
+    /**
+     * 获取计量单位名称
+     */
+    public String getMeasUnitName() {
+        return measUnitName;
+    }
+
+    /**
+     * 设置计量单位名称
+     */
+    public void setMeasUnitName(String measUnitName) {
+        this.measUnitName = measUnitName == null ? null : measUnitName.trim();
+    }
+
+    /**
+     * 获取排序
+     */
+    public Integer getSort() {
+        return sort;
+    }
+
+    /**
+     * 设置排序
+     */
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    /**
+     * 获取计量单位状态（有效、无效）
+     */
+    public String getEffeInvalState() {
+        return effeInvalState;
+    }
+
+    /**
+     * 设置计量单位状态（有效、无效）
+     */
+    public void setEffeInvalState(String effeInvalState) {
+        this.effeInvalState = effeInvalState == null ? null : effeInvalState.trim();
+    }
+
+    /**
+     * 获取所属量纲类型
+     */
+    public String getDimensionsType() {
+        return dimensionsType;
+    }
+
+    /**
+     * 设置所属量纲类型
+     */
+    public void setDimensionsType(String dimensionsType) {
+        this.dimensionsType = dimensionsType == null ? null : dimensionsType.trim();
+    }
+
+    /**
+     * 获取换算系数
+     */
+    public Double getTransXs() {
+        return transXs;
+    }
+
+    /**
+     * 设置换算系数
+     */
+    public void setTransXs(Double transXs) {
+        this.transXs = transXs;
+    }
+
+    /**
+     * 获取备注
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * 设置备注
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
+    }
+}
