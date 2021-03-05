@@ -264,7 +264,7 @@
   </select>
 <!--  通过分类id查找商品属性-->
   <select id="findAttrByCommId" resultType="com.wisea.yysc.common.vo.CommAttriMageListVo" parameterType="java.lang.Long">
-    select distinct cam.*
+    select distinct cam.*,cas.if_requ ifRequ
     from comm_mage cm
            left join comm_attri_set cas on cm.id = cas.comm_id
            left join comm_attri_mage cam on cas.attri_id = cam.id

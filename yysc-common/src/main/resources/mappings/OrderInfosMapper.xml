@@ -82,6 +82,7 @@
       <result column="url" property="commPubUrl" jdbcType="VARCHAR"/>
     </association>
     <association property="ordInvo" javaType="com.wisea.yysc.common.vo.OrdInvoListVo">
+      <id column="inv_id" property="id" jdbcType="BIGINT"/>
       <result column="invo_type" property="invoType" jdbcType="VARCHAR"/>
       <result column="invo_form" property="invoForm" jdbcType="VARCHAR"/>
       <result column="invo_catg_type" property="invoCatgType" jdbcType="VARCHAR"/>
@@ -128,7 +129,7 @@
     ord_cancel_date, pay_ord_date, comm_total_count, seller_id, comm_total_price,amount_payable, order_state_type as ord_state_type,
     refer_ord_date, seller_sure_date, pay_dead_line_date,
     cpi.comm_title,lsq.id as 'lsq_id',lsq.spec_name,cp.url,
-    inv.invo_type,inv.invo_form,inv.invo_catg_type,inv.invo_title,inv.regist_address,inv.invo_state,inv.invo_content_type,
+    inv.id as 'inv_id',inv.invo_type,inv.invo_form,inv.invo_catg_type,inv.invo_title,inv.regist_address,inv.invo_state,inv.invo_content_type,
     eif.ele_invo_url,eif.file_type,
     mi.cont_name,mi.regist_tel,mi.entp_name,mi.address,
     ooi.operator,ooi.opreat_date,ooi.opreat_content

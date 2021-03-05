@@ -90,7 +90,23 @@ public class CommAttriMageListVo {
     /**
      * 计量单位id
      */
+    @ApiModelProperty(value="计量单位id")
     private Long measUnitId;
+
+
+    /**
+     * 是否必填
+     */
+    @ApiModelProperty(value="是否必填")
+    private String ifRequ;
+
+    public String getIfRequ() {
+        return ifRequ;
+    }
+
+    public void setIfRequ(String ifRequ) {
+        this.ifRequ = ifRequ;
+    }
 
     public Long getMeasUnitId() {
         return measUnitId;

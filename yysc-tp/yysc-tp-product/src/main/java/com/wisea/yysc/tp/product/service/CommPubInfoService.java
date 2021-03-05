@@ -81,9 +81,12 @@ public class CommPubInfoService extends BaseService {
 			entity.setDelFlag(CommPubInfo.DEL_FLAG_DELETE);
 			entity.preUpdate();
 			mapper.updateByPrimaryKey(entity);
+			commAttriMapper.deleteByCommPubId(entity.getId());
+			levelSpecQuoteMapper.deleteByCommPubId(entity.getId());
+			commPictureMapper.deleteByCommPubId(entity.getId());
 		}else{
 			resultPoJo.setCode(ConstantError.ERR_005);
-			resultPoJo.setMsg("数据错误，操作对象不存在或数据的状态不符合");
+			resultPoJo.setMsg("数据错误，操作对象不存在或上架状态的不可以被修改");
 		}
 		return resultPoJo;
     }
@@ -96,9 +99,10 @@ public class CommPubInfoService extends BaseService {
      * @Description 新增或修改CommPubInfo
      */
 	@Transactional(readOnly = false)
-    public ResultPoJo saveOrUpdate(CommPubInfoPo po) {
+    public ResultPoJo<CommPubInfoInsertVo> saveOrUpdate(CommPubInfoPo po) {
         LoggerUtil.infoWithContext("【saveOrUpdate】新增或修改：", po);
-		ResultPoJo resultPoJo = new ResultPoJo<>(ConstantError.NOMAL);
+		ResultPoJo<CommPubInfoInsertVo> resultPoJo = new ResultPoJo<>(ConstantError.NOMAL);
+		CommPubInfoInsertVo commPubInfoInsertVo = new CommPubInfoInsertVo();
 		if(ConverterUtil.isNotEmpty(po.getId())){
 			//修改
 			CommPubInfo entity = mapper.selectByPrimaryKey(po.getId());
@@ -112,9 +116,12 @@ public class CommPubInfoService extends BaseService {
 				commPictureMapper.deleteByCommPubId(entity.getId());
 				//重新新增
 				commPubInfoInsert(po, entity.getId());
+				commPubInfoInsertVo.setId(entity.getId());
+				commPubInfoInsertVo.setCommTitle(entity.getCommTitle());
+				resultPoJo.setResult(commPubInfoInsertVo);
 			}else{
 				resultPoJo.setCode(ConstantError.ERR_005);
-				resultPoJo.setMsg("数据错误，操作对象不存在或数据的状态不符合");
+				resultPoJo.setMsg("数据错误，操作对象不存在或上架状态的不可以被修改");
 			}
 		}else{
 			//新增商品发布
@@ -125,6 +132,9 @@ public class CommPubInfoService extends BaseService {
 			entity.setMembId(SystemUtils.getUser().getId());
 			mapper.insertSelective(entity);
 			commPubInfoInsert(po, entity.getId());
+			commPubInfoInsertVo.setId(entity.getId());
+			commPubInfoInsertVo.setCommTitle(entity.getCommTitle());
+			resultPoJo.setResult(commPubInfoInsertVo);
 		}
 		return resultPoJo;
     }
@@ -138,6 +148,7 @@ public class CommPubInfoService extends BaseService {
 				BeanUtils.copyProperties(p, commAttri,"id");
 				commAttri.preInsert();
 				commAttri.setCommPubId(id);
+				commAttri.setDelFlag("0");
 				commAttris.add(commAttri);
 			});
 			commAttriMapper.batchInsert(commAttris);
@@ -151,6 +162,7 @@ public class CommPubInfoService extends BaseService {
 				BeanUtils.copyProperties(p, levelSpecQuote,"id");
 				levelSpecQuote.preInsert();
 				levelSpecQuote.setCommPubId(id);
+				levelSpecQuote.setDelFlag("0");
 				levelSpecQuotes.add(levelSpecQuote);
 			});
 			levelSpecQuoteMapper.batchInsert(levelSpecQuotes);
@@ -164,6 +176,7 @@ public class CommPubInfoService extends BaseService {
 				BeanUtils.copyProperties(p, commPicture,"id");
 				commPicture.preInsert();
 				commPicture.setCommPubId(id);
+				commPicture.setDelFlag("0");
 				commPictures.add(commPicture);
 			});
 			commPictureMapper.batchInsert(commPictures);

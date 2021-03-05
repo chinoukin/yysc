@@ -52,6 +52,8 @@ public class BuyerOrderService extends PayApiNotifyHandler {
     @Autowired
     OrdInvoMapper ordInvoMapper;
     @Autowired
+    InvoInfoMapper invoInfoMapper;
+    @Autowired
     MeasUnitMageMapper measUnitMageMapper;
     @Autowired
     WxPayApiService wxPayApiService;
@@ -381,10 +383,11 @@ public class BuyerOrderService extends PayApiNotifyHandler {
         if (ConverterUtil.isNotEmpty(buyerGeneratingOrderPo.getInvoId())) {
             LongIdPo longIds = new LongIdPo();
             longIds.setId(buyerGeneratingOrderPo.getInvoId());
-            OrdInvoGetVo invoGet = ordInvoMapper.findInfo(longIds);
+            InvoInfoInfoVo info = invoInfoMapper.findInfo(longIds);
             OrdInvo ordInvo = new OrdInvo();
-            ConverterUtil.copyProperties(invoGet, ordInvo);
+            ConverterUtil.copyProperties(info, ordInvo);
             ordInvo.preInsert();
+            ordInvo.setOrdId(orderInfo.getId());
             ordInvoMapper.insertSelective(ordInvo);
         }
         // 初始化 订单操作表

@@ -8,6 +8,7 @@ import com.wisea.yysc.common.po.product.CommPubInfoBatchDelPo;
 import com.wisea.yysc.common.po.product.CommPubInfoPageListPo;
 import com.wisea.yysc.common.po.product.CommPubInfoPo;
 import com.wisea.yysc.common.vo.product.CommPubInfoInfoVo;
+import com.wisea.yysc.common.vo.product.CommPubInfoInsertVo;
 import com.wisea.yysc.common.vo.product.CommPubInfoPageListVo;
 import com.wisea.yysc.common.vo.product.NewApplicationsVo;
 import com.wisea.yysc.tp.product.service.CommPubInfoService;
@@ -67,7 +68,7 @@ public class CommPubInfoController {
     @DataCheck
     @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
     @ApiOperation(nickname = "新增或修改", value = "新增或修改", notes = "新增或修改", httpMethod = "POST")
-    public ResultPoJo saveOrUpdate(@RequestBody CommPubInfoPo po) {
+    public ResultPoJo<CommPubInfoInsertVo> saveOrUpdate(@RequestBody CommPubInfoPo po) {
         return service.saveOrUpdate(po);
     }
 

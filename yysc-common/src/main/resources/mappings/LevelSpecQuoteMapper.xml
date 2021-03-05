@@ -36,12 +36,12 @@
       sfyxsy_flag, trial_days, dimensions_type, 
       price, create_by, create_date, 
       update_by, update_date, remarks, 
-      del_flag)
+      del_flag,meas_unit_id)
     values (#{id,jdbcType=BIGINT}, #{commPubId,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR}, 
       #{sfyxsyFlag,jdbcType=CHAR}, #{trialDays,jdbcType=INTEGER}, #{dimensionsType,jdbcType=VARCHAR}, 
       #{price,jdbcType=DOUBLE}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
-      #{delFlag,jdbcType=CHAR})
+      #{delFlag,jdbcType=CHAR},#{info.measUnitId,jdbcType=BIGINT})
   </insert>
 
   <insert id="batchInsert" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >
@@ -49,13 +49,13 @@
                                   sfyxsy_flag, trial_days, dimensions_type,
                                   price, create_by, create_date,
                                   update_by, update_date, remarks,
-                                  del_flag)
+                                  del_flag,meas_unit_id)
     values <foreach collection ="list" item="info" separator="," >
            (#{info.id,jdbcType=BIGINT}, #{info.commPubId,jdbcType=BIGINT}, #{info.specName,jdbcType=VARCHAR},
             #{info.sfyxsyFlag,jdbcType=CHAR}, #{info.trialDays,jdbcType=INTEGER}, #{info.dimensionsType,jdbcType=VARCHAR},
             #{info.price,jdbcType=DOUBLE}, #{info.createBy,jdbcType=VARCHAR}, #{info.createDate,jdbcType=TIMESTAMP},
             #{info.updateBy,jdbcType=VARCHAR}, #{info.updateDate,jdbcType=TIMESTAMP}, #{info.remarks,jdbcType=VARCHAR},
-            #{info.delFlag,jdbcType=CHAR})
+            #{info.delFlag,jdbcType=CHAR},#{info.measUnitId,jdbcType=BIGINT})
   </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.wisea.yysc.common.entity.LevelSpecQuote" >

@@ -48,6 +48,7 @@
     </collection>
     <collection property="commAttris" ofType="com.wisea.yysc.common.vo.CommAttriListVo">
       <id column="caid" property="id" jdbcType="BIGINT" />
+      <id column="comm_attri_id" property="commAttriId" jdbcType="BIGINT" />
       <result column="comm_attri_name" property="commAttriName" jdbcType="VARCHAR" />
       <result column="comm_attri_column" property="commAttriColumn" jdbcType="VARCHAR" />
       <result column="comm_attri_type" property="commAttriType" jdbcType="VARCHAR" />
@@ -329,6 +330,7 @@
                     cp.url,
                     cp.comm_picture_type,
                     ca.id  caid,
+                    ca.comm_attri_id,
                     ca.comm_attri_name,
                     ca.comm_attri_column,
                     ca.comm_attri_type,
